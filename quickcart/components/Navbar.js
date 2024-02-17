@@ -26,10 +26,10 @@ const Navbar = () => {
       </div>
       <div className="user flex space-x-2">
         <div className="Cart ">
-          <FaShoppingCart className='text-xl md: text-2xl cursor-pointer'/>
+          <FaShoppingCart className='text-xl md:text-2xl cursor-pointer'/>
         </div>
         <div className="profile ">
-        <IoPersonCircleSharp className='text-xl md: text-2xl cursor-pointer'/>
+        <IoPersonCircleSharp className='text-xl md:text-2xl cursor-pointer'/>
         </div>
       </div>
     </div>
