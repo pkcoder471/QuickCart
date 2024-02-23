@@ -75,56 +75,13 @@ const Navbar = () => {
               </div>
             <button className="remove h-[40%]  border-gray-200 border-t-2 ">Remove</button>
           </div>
-          <div className='item bg-white h-32 w-[80%] shadow-md rounded-sm flex flex-col'>
-            <div className='desc h-[60%] flex flex-row items-center '>
-               <div className="image w-[30%] p-3 "><img alt="ecommerce"  className="h-[100%] w-[100%] m-auto block" src="https://m.media-amazon.com/images/I/61b4R3TMXoL._SY879_.jpg"/></div>
-               <div className="item-desc text-xs w-[50%] p-3">QuickCart Premium tshirst(XL/black)</div>
-               <div className="qty w-[30%] flex space-x-1 items-center">
-                <span className='cursor-pointer'><AiOutlinePlusSquare/></span>
-                <p>1</p>
-                <span className='cursor-pointer'><AiOutlineMinusSquare /></span></div>
-              </div>
-            <button className="remove h-[40%]  border-gray-200 border-t-2 ">Remove</button>
-          </div>
-          <div className='item bg-white h-32 w-[80%] shadow-md rounded-sm flex flex-col'>
-            <div className='desc h-[60%] flex flex-row items-center '>
-               <div className="image w-[30%] p-3 "><img alt="ecommerce"  className="h-[100%] w-[100%] m-auto block" src="https://m.media-amazon.com/images/I/61b4R3TMXoL._SY879_.jpg"/></div>
-               <div className="item-desc text-xs w-[50%] p-3">QuickCart Premium tshirst(XL/black)</div>
-               <div className="qty w-[30%] flex space-x-1 items-center">
-                <span className='cursor-pointer'><AiOutlinePlusSquare/></span>
-                <p>1</p>
-                <span className='cursor-pointer'><AiOutlineMinusSquare /></span></div>
-              </div>
-            <button className="remove h-[40%]  border-gray-200 border-t-2 ">Remove</button>
-          </div>
-          <div className='item bg-white h-32 w-[80%] shadow-md rounded-sm flex flex-col'>
-            <div className='desc h-[60%] flex flex-row items-center '>
-               <div className="image w-[30%] p-3 "><img alt="ecommerce"  className="h-[100%] w-[100%] m-auto block" src="https://m.media-amazon.com/images/I/61b4R3TMXoL._SY879_.jpg"/></div>
-               <div className="item-desc text-xs w-[50%] p-3">QuickCart Premium tshirst(XL/black)</div>
-               <div className="qty w-[30%] flex space-x-1 items-center">
-                <span className='cursor-pointer'><AiOutlinePlusSquare/></span>
-                <p>1</p>
-                <span className='cursor-pointer'><AiOutlineMinusSquare /></span></div>
-              </div>
-            <button className="remove h-[40%]  border-gray-200 border-t-2 ">Remove</button>
-          </div>
-          <div className='item bg-white h-32 w-[80%] shadow-md rounded-sm flex flex-col'>
-            <div className='desc h-[60%] flex flex-row items-center '>
-               <div className="image w-[30%] p-3 "><img alt="ecommerce"  className="h-[100%] w-[100%] m-auto block" src="https://m.media-amazon.com/images/I/61b4R3TMXoL._SY879_.jpg"/></div>
-               <div className="item-desc text-xs w-[50%] p-3">QuickCart Premium tshirst(XL/black)</div>
-               <div className="qty w-[30%] flex space-x-1 items-center">
-                <span className='cursor-pointer'><AiOutlinePlusSquare/></span>
-                <p>1</p>
-                <span className='cursor-pointer'><AiOutlineMinusSquare /></span></div>
-              </div>
-            <button className="remove h-[40%]  border-gray-200 border-t-2 ">Remove</button>
-          </div>
-          
-          
         </main>
         <footer className='totalSum flex items-center flex-col space-y-2 p-3'>
           <p className='font-semibold'>Total Amount: ₹499</p>
+          <div>
           <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">CheckOut</button>
+          <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Clear Cart</button>        
+          </div>
         </footer>
       </div>
     </div>
