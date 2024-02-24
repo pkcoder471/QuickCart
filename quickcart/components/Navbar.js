@@ -23,7 +23,7 @@ const Navbar = () => {
     }
   }
   return (
-    <div className='nav flex bg-white justify-between items-center p-2 alg shadow-md sticky top-0  '>
+    <div className='nav flex bg-white justify-between items-center p-2 alg shadow-md sticky top-0  z-10 '>
       <div className="hamburger-icon md:hidden cursor-pointer">
       <GiHamburgerMenu className='text-xl'/>
       </div>
@@ -79,8 +79,8 @@ const Navbar = () => {
         <footer className='totalSum flex items-center flex-col space-y-2 p-3'>
           <p className='font-semibold'>Total Amount: ₹499</p>
           <div>
-          <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">CheckOut</button>
-          <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Clear Cart</button>        
+          <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">CheckOut</button>
+          <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Clear Cart</button>        
           </div>
         </footer>
       </div>
