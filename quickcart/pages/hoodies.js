@@ -7,7 +7,7 @@ const hoodies = () => {
       <div className="container px-16 py-16 mx-auto">
         <div className="flex flex-wrap -m-4">
           
-            <Link href={'/product/hoodie'} className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-sm cursor-pointer "><div>
+            <Link href={'/product/quickcart-premium-hoodie'} className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-sm cursor-pointer "><div>
             <a className="  relative h-80 m-auto rounded overflow-hidden">
               <img alt="ecommerce"  className="h-80 m-auto block" src="https://m.media-amazon.com/images/I/71TzNW2FArL._SY741_.jpg"/>
             </a>
@@ -18,7 +18,7 @@ const hoodies = () => {
             </div>
           </div></Link>
           
-          <Link href={'/product/hoodie'} className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-sm cursor-pointer "><div>
+          <Link href={'/product/quickcart-premium-hoodie'} className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-sm cursor-pointer "><div>
             <a className="  relative h-80 m-auto rounded overflow-hidden">
               <img alt="ecommerce"  className="h-80 m-auto block  " src="https://m.media-amazon.com/images/I/71TzNW2FArL._SY741_.jpg"/>
             </a>
@@ -28,7 +28,7 @@ const hoodies = () => {
               <p className="mt-1">₹499</p>
             </div>
           </div></Link>
-          <Link href={'/product/hoodie'} className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-sm cursor-pointer "><div>
+          <Link href={'/product/quickcart-premium-hoodie'} className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-sm cursor-pointer "><div>
             <a className="  relative h-80 m-auto rounded overflow-hidden">
               <img alt="ecommerce"  className="h-80 m-auto block  " src="https://m.media-amazon.com/images/I/71TzNW2FArL._SY741_.jpg"/>
             </a>
@@ -38,7 +38,7 @@ const hoodies = () => {
               <p className="mt-1">₹499</p>
             </div>
           </div></Link>
-          <Link href={'/product/hoodie'} className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-sm cursor-pointer "><div>
+          <Link href={'/product/quickcart-premium-hoodie'} className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-sm cursor-pointer "><div>
             <a className="  relative h-80 rounded overflow-hidden">
               <img alt="ecommerce"  className="h-80 m-auto block  " src="https://m.media-amazon.com/images/I/71TzNW2FArL._SY741_.jpg"/>
             </a>
@@ -48,7 +48,7 @@ const hoodies = () => {
               <p className="mt-1">₹499</p>
             </div>
           </div></Link>
-          <Link href={'/product/hoodie'} className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-sm cursor-pointer "><div>
+          <Link href={'/product/quickcart-premium-hoodie'} className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-sm cursor-pointer "><div>
             <a className="  relative h-80 m-auto rounded overflow-hidden">
               <img alt="ecommerce"  className="h-80 m-auto block  " src="https://m.media-amazon.com/images/I/71TzNW2FArL._SY741_.jpg"/>
             </a>
@@ -58,7 +58,7 @@ const hoodies = () => {
               <p className="mt-1">₹499</p>
             </div>
           </div></Link>
-          <Link href={'/product/hoodie'} className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-sm cursor-pointer "><div>
+          <Link href={'/product/quickcart-premium-hoodie'} className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-sm cursor-pointer "><div>
             <a className="  relative h-80 m-auto rounded overflow-hidden">
               <img alt="ecommerce"  className="h-80 m-auto block  " src="https://m.media-amazon.com/images/I/71TzNW2FArL._SY741_.jpg"/>
             </a>
@@ -68,7 +68,7 @@ const hoodies = () => {
               <p className="mt-1">₹499</p>
             </div>
           </div></Link>
-          <Link href={'/product/hoodie'} className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-sm cursor-pointer "><div>
+          <Link href={'/product/quickcart-premium-hoodie'} className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-sm cursor-pointer "><div>
             <a className="  relative h-80 m-auto rounded overflow-hidden">
               <img alt="ecommerce"  className="h-80 m-auto block  " src="https://m.media-amazon.com/images/I/71TzNW2FArL._SY741_.jpg"/>
             </a>
@@ -78,7 +78,7 @@ const hoodies = () => {
               <p className="mt-1">₹499</p>
             </div>
           </div></Link>
-          <Link href={'/product/hoodie'} className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-sm cursor-pointer "><div>
+          <Link href={'/product/quickcart-premium-hoodie'} className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-sm cursor-pointer "><div>
             <a className="  relative h-80 m-auto rounded overflow-hidden">
               <img alt="ecommerce"  className="h-80 m-auto block  " src="https://m.media-amazon.com/images/I/71TzNW2FArL._SY741_.jpg"/>
             </a>

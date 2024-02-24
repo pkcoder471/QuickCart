@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaShoppingCart } from "react-icons/fa";
 import { IoPersonCircleSharp } from "react-icons/io5";
@@ -10,8 +10,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRef } from 'react';
 
-const Navbar = () => {
+const Navbar = ({addToCart, cart, removeItemCart, clearCart, subTotal}) => {
   const ref = useRef()
+  
   const handleCart = () =>{
     if(ref.current.classList.contains('translate-x-full')){
       ref.current.classList.remove('translate-x-full');
@@ -53,36 +54,30 @@ const Navbar = () => {
         <span className='absolute top-0 right-0 p-5 cursor-pointer text-xl'><IoCloseCircle onClick={handleCart}/></span>
         </div>
         <main className='items flex flex-col space-y-5 w-[100%] max-h-[72vh]  overflow-y-scroll items-center'>
-          <div className='item bg-white h-32 w-[80%] shadow-md rounded-sm flex flex-col'>
+          {Object.keys(cart).length===0 && <div className='text-md font-semibold'>
+            Your Cart is Empty!
+          </div> }
+          {Object.keys(cart).length!=0 && Object.keys(cart).map((item)=>{
+          return <div key={item} className='item bg-white h-32 w-[80%] shadow-md rounded-sm flex flex-col'>
             <div className='desc h-[60%] flex flex-row items-center '>
                <div className="image w-[30%] p-3 "><img alt="ecommerce"  className="h-[100%] w-[100%] m-auto block" src="https://m.media-amazon.com/images/I/61b4R3TMXoL._SY879_.jpg"/></div>
-               <div className="item-desc text-xs w-[50%] p-3">QuickCart Premium tshirst(XL/black)</div>
+               <div className="item-desc text-xs w-[50%] p-3">{cart[item].name}({cart[item].size}/{cart[item].color})</div>
                <div className="qty w-[30%] flex space-x-1 items-center">
-                <span className='cursor-pointer'><AiOutlinePlusSquare/></span>
-                <p>1</p>
-                <span className='cursor-pointer'><AiOutlineMinusSquare /></span></div>
+                <span className='cursor-pointer' onClick={()=>{removeItemCart(item,1)}} ><AiOutlineMinusSquare/></span>
+                <p>{cart[item].qty}</p>
+                <span className='cursor-pointer' onClick={()=>{addToCart(item,1,cart[item].price,cart[item].color,cart[item].size,cart[item].name)}} ><AiOutlinePlusSquare /></span></div>
               </div>
-            <button className="remove h-[40%]  border-gray-200 border-t-2 ">Remove</button>
+            <button className="remove h-[40%]  border-gray-200 border-t-2 " onClick={()=>{removeItemCart(item,cart[item].qty)}}>Remove</button>
           </div>
-          <div className='item bg-white h-32 w-[80%] shadow-md rounded-sm flex flex-col'>
-            <div className='desc h-[60%] flex flex-row items-center '>
-               <div className="image w-[30%] p-3 "><img alt="ecommerce"  className="h-[100%] w-[100%] m-auto block" src="https://m.media-amazon.com/images/I/61b4R3TMXoL._SY879_.jpg"/></div>
-               <div className="item-desc text-xs w-[50%] p-3">QuickCart Premium tshirst(XL/black)</div>
-               <div className="qty w-[30%] flex space-x-1 items-center">
-                <span className='cursor-pointer'><AiOutlinePlusSquare/></span>
-                <p>1</p>
-                <span className='cursor-pointer'><AiOutlineMinusSquare /></span></div>
-              </div>
-            <button className="remove h-[40%]  border-gray-200 border-t-2 ">Remove</button>
-          </div>
+          })}
         </main>
-        <footer className='totalSum flex items-center flex-col space-y-2 p-3'>
-          <p className='font-semibold'>Total Amount: ₹499</p>
+        {Object.keys(cart).length!==0 && <footer className='totalSum flex items-center flex-col space-y-2 p-3'>
+          <p className='font-semibold'>Total Amount: ₹{subTotal}</p>
           <div>
           <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">CheckOut</button>
-          <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Clear Cart</button>        
+          <button type="button" onClick={()=>{clearCart()}} className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Clear Cart</button>        
           </div>
-        </footer>
+        </footer>}
       </div>
     </div>
     

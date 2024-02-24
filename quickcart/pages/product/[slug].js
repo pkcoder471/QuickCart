@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 
-const Slug = () => {
+const Slug = ({addToCart}) => {
   const router = useRouter();
   const { slug } = router.query;
   const [pincode, setPincode] = useState()
@@ -79,7 +79,7 @@ const Slug = () => {
               </div>
               <div className="flex">
                 <span className="title-font font-medium text-2xl text-gray-900">₹499</span>
-                <button className="flex ml-5 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded">Add to Cart</button>
+                <button onClick={()=>{addToCart(slug, 1, 499, "Red", "XL", 'QuickCart premium hoodie')}} className="flex ml-5 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded">Add to Cart</button>
                 
               </div>
               <div className="flex mt-5">
