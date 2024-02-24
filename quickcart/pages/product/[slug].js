@@ -1,9 +1,29 @@
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useState } from 'react'
 
 const Slug = () => {
   const router = useRouter();
   const { slug } = router.query;
+  const [pincode, setPincode] = useState()
+  const [display, setDisplay] = useState()
+
+  const handleChange = (e) =>{
+      setPincode(e.target.value);
+  }
+
+  const handlePincode = async () =>{
+    const response = await fetch('http://localhost:3000/api/pincode');
+    const json = await response.json();
+    console.log(json);
+
+    if(json.includes(parseInt(pincode))){
+      setDisplay(true);
+    }
+    else{
+      setDisplay(false);
+    }
+  }
+
   return (
     <section className="text-gray-600 body-font overflow-hidden">
       <div className="container px-5 py-24 mx-auto">
@@ -61,6 +81,14 @@ const Slug = () => {
                 <span className="title-font font-medium text-2xl text-gray-900">₹499</span>
                 <button className="flex ml-5 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded">Add to Cart</button>
                 
+              </div>
+              <div className="flex mt-5">
+                <input type='text' onChange={handleChange} className='pincode border-2 border-gray-400 focus:outline-none rounded px-2' placeholder='Enter your Pincode'  name='pincode'  ></input>
+                <button onClick={handlePincode} className="flex ml-5 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded">Check Pincode</button>
+              </div>
+              <div className="msg my-2">
+              { (display!=null && display) && <div><p className='text-red-600'>Hurray!! we deliver to this location</p></div>}
+              { (display!=null && !display) &&  <div><p className='text-red-600'>Sorry!! we do not deliver to this location</p></div>}
               </div>
             </div>
         </div>
