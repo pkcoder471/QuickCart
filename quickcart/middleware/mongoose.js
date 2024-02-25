@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const URI = process.env.MONGO_URI;
+const URI = process.env.MONGO_URL;
 
-const ConnectToDb = async (handler) =>{
+const connectToDb = handler => async (req,res) =>{
     if(mongoose.connections[0].readyState){
         return handler(req,res);
     }
@@ -9,4 +9,4 @@ const ConnectToDb = async (handler) =>{
     return handler(req,res)
 }
 
-export default ConnectToDb;
+export default connectToDb;
