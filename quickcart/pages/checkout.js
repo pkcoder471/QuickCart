@@ -4,10 +4,10 @@ import { AiOutlineMinusSquare } from "react-icons/ai";
 
 const checkout = ({addToCart, cart, removeItemCart, subTotal}) => {
   return (
-    <div className='container flex flex-col items-center px-48'>
-      <h1 className='text-3xl font-bold mt-10'>Checkout</h1>
+    <div className='container flex flex-col items-center md:px-48 px-5'>
+      <h1 className='md:text-3xl text-2xl font-bold mt-10'>Checkout</h1>
       <div className="details w-full">
-        <h2 className='text-2xl font-bold items-start my-2'>1. Personal Details</h2>
+        <h2 className='md:text-2xl text-xl font-bold items-start my-2'>1. Personal Details</h2>
         <form className='flex flex-row flex-wrap'>
           <div className='flex flex-col  w-1/2 my-2'>
           <label htmlFor="name">Name</label>
@@ -41,7 +41,7 @@ const checkout = ({addToCart, cart, removeItemCart, subTotal}) => {
           </form>
       </div>
       <div className="items w-full">
-      <h2 className='text-2xl font-bold items-start my-2'>2. Review Cart items</h2>
+      <h2 className='md:text-2xl text-xl font-bold items-start my-2'>2. Review Cart items</h2>
       <main className='items flex flex-col space-y-5 w-[100%] mt-10 items-start'>
           {Object.keys(cart).length===0 && <div className='text-md font-semibold'>
             Your Cart is Empty!
@@ -49,8 +49,8 @@ const checkout = ({addToCart, cart, removeItemCart, subTotal}) => {
           {Object.keys(cart).length!=0 && Object.keys(cart).map((item)=>{
           return <div key={item} className='item bg-white h-32 w-[100%] shadow-md rounded-sm flex flex-col'>
             <div className='desc h-[60%] flex flex-row items-center '>
-               <div className="image w-[30%] p-36 "><img alt="ecommerce"  className="h-[100%] w-[100%] m-auto block" src="https://m.media-amazon.com/images/I/61b4R3TMXoL._SY879_.jpg"/></div>
-               <div className="item-desc text-md w-[50%] p-3">{cart[item].name}({cart[item].size}/{cart[item].color})</div>
+               <div className="image w-[30%] md:p-36 p-5 "><img alt="ecommerce"  className="h-[100%] w-[100%] m-auto block" src="https://m.media-amazon.com/images/I/61b4R3TMXoL._SY879_.jpg"/></div>
+               <div className="item-desc md:text-md text-sm w-[50%] p-3">{cart[item].name}({cart[item].size}/{cart[item].color})</div>
                <div className="qty w-[30%] flex space-x-1 items-center">
                 <span className='cursor-pointer' onClick={()=>{removeItemCart(item,1)}} ><AiOutlineMinusSquare/></span>
                 <p>{cart[item].qty}</p>
