@@ -14,7 +14,6 @@ const Slug = ({addToCart}) => {
   const handlePincode = async () =>{
     const response = await fetch('http://localhost:3000/api/pincode');
     const json = await response.json();
-    console.log(json);
 
     if(json.includes(parseInt(pincode))){
       setDisplay(true);
@@ -83,7 +82,7 @@ const Slug = ({addToCart}) => {
                 
               </div>
               <div className="flex mt-5">
-                <input type='text' onChange={handleChange} className='pincode border-2 border-gray-400 focus:outline-none rounded px-2' placeholder='Enter your Pincode'  name='pincode'  ></input>
+                <input type='number' onChange={handleChange} className='pincode border-2 border-gray-400 focus:outline-none rounded px-2' placeholder='Enter your Pincode'  name='pincode'  ></input>
                 <button onClick={handlePincode} className="flex ml-5 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded">Check Pincode</button>
               </div>
               <div className="msg my-2">
