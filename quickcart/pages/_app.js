@@ -23,7 +23,6 @@ export default function App({ Component, pageProps }) {
     localStorage.setItem("cart",JSON.stringify(myCart));
     const allItemCodes = Object.keys(myCart);
     let Amount=0;
-    console.log(allItemCodes);
     for(let i=0;i<allItemCodes.length;i++){
       Amount+=(myCart[allItemCodes[i]].price*myCart[allItemCodes[i]].qty);
     }

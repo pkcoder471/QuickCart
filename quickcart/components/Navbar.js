@@ -29,7 +29,7 @@ const Navbar = ({addToCart, cart, removeItemCart, clearCart, subTotal}) => {
       <GiHamburgerMenu className='text-xl'/>
       </div>
       <div className="logo flex items-center">
-      <Link href={'/'} className='flex items-center'><Image className='cursor-pointer' src="/quickcart_logo.png" width={40} height={40}></Image>
+      <Link href={'/'} className='flex items-center'><Image alt='logo' className='cursor-pointer' src="/quickcart_logo.png" width={40} height={40}></Image>
       <h1 className='font-semibold text-xl cursor-pointer'>QuickCart</h1></Link>
       <div className=" list md:flex ml-5 md:static hidden  absolute">
         <ul className='flex  space-x-3'>
