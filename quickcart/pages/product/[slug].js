@@ -96,4 +96,14 @@ const Slug = ({addToCart}) => {
   )
 }
 
+export async function getServerSideProps() { 
+  const response = await fetch("http://localhost:3000/api/getProducts?category=Tshirts", {
+    method: "GET",
+  });
+  const json = await response.json()
+  let Products = JSON.parse(JSON.stringify(json));
+  return { 
+      props: { products: Products.products }, 
+  }; 
+}
 export default Slug
