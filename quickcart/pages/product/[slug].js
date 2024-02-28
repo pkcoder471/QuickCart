@@ -3,10 +3,8 @@ import React, { useState } from 'react'
 import Product from '@/models/Product';
 import mongoose from 'mongoose';
 
-const Slug = ({ addToCart, product, variants }) => {
-  console.log(product, variants);
+const Slug = ({ buyNow, addToCart, product, variants }) => {
   const router = useRouter();
-  const { slug } = router.query;
   const [pincode, setPincode] = useState()
   const [display, setDisplay] = useState()
   const [newColor, setnewColor] = useState(product.color);
@@ -75,12 +73,13 @@ const Slug = ({ addToCart, product, variants }) => {
             </div>
             <div className="flex">
               <span className="title-font font-medium text-2xl text-gray-900">₹499</span>
-              <button onClick={()=>{refreshVariant(red,newSize)}} onClick={() => { addToCart(slug, 1, 499, "Red", "XL", 'QuickCart premium hoodie') }} className="flex ml-5 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded">Add to Cart</button>
+              <button onClick={() => { addToCart(product.itemCode, 1, product.price, newColor, newSize, product.name) }} className="flex ml-5 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded">Add to Cart</button>
+              <button onClick={()=>{buyNow(product.itemCode, 1, product.price, newColor, newSize, product.name)}} className="flex ml-5 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded">Buy Now</button>
 
             </div>
             <div className="flex mt-5">
               <input type='number' onChange={handleChange} className='pincode border-2 border-gray-400 focus:outline-none rounded px-2' placeholder='Enter your Pincode' name='pincode'  ></input>
-              <button onClick={()=>{refreshVariant(red,newSize)}} onClick={handlePincode} className="flex ml-5 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded">Check Pincode</button>
+              <button onClick={handlePincode} className="flex ml-5 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded">Check Pincode</button>
             </div>
             <div className="msg my-2">
               {(display != null && display) && <div><p className='text-red-600'>Hurray!! we deliver to this location</p></div>}
