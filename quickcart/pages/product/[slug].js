@@ -2,6 +2,8 @@ import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import Product from '@/models/Product';
 import mongoose from 'mongoose';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Slug = ({ buyNow, addToCart, product, variants }) => {
   const router = useRouter();
@@ -20,9 +22,27 @@ const Slug = ({ buyNow, addToCart, product, variants }) => {
 
     if (json.includes(parseInt(pincode))) {
       setDisplay(true);
+      toast.success('Hooray, Pincode servicable', {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
     }
     else {
       setDisplay(false);
+      toast.error('Sorry, Pincode not servicable', {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
     }
   }
 
@@ -33,6 +53,7 @@ const Slug = ({ buyNow, addToCart, product, variants }) => {
 
   return (
     <section className="text-gray-600 body-font overflow-hidden">
+      <ToastContainer/>
       <div className="container px-5 py-24 mx-auto">
         <div className="lg:w-3/5 mx-auto flex flex-wrap">
           <img alt="ecommerce" className="lg:w-1/2 lg:h-auto lg:px-10 lg:pb-10 h-80 m-auto rounded" src={product.img} />
@@ -45,18 +66,18 @@ const Slug = ({ buyNow, addToCart, product, variants }) => {
               <div className="flex items-center">
                 <span className="mr-1">Color :</span>
                 <div className="colors mt-1">
-                  {Object.keys(variants).includes('red') && Object.keys(variants['red']).includes(newSize) && <button onClick={()=>{refreshVariant("red",newSize)}} className={`border-2 ${product.color === "red"? 'border-black':'border-gray-300'} ml-1 bg-red-500 rounded-full w-6 h-6 focus:outline-none`}></button>}
-                  {Object.keys(variants).includes('green') && Object.keys(variants['green']).includes(newSize) && <button onClick={()=>{refreshVariant("green",newSize)}} className={`border-2 ${product.color === "green"? 'border-black':'border-gray-300'} ml-1 bg-green-500 rounded-full w-6 h-6 focus:outline-none`}></button>}
-                  {Object.keys(variants).includes('yellow') && Object.keys(variants['yellow']).includes(newSize) && <button onClick={()=>{refreshVariant("yellow",newSize)}} className={`border-2 ${product.color === "yellow"? 'border-black':'border-gray-300'} ml-1 bg-yellow-500 rounded-full w-6 h-6 focus:outline-none`}></button>}
-                  {Object.keys(variants).includes('black') && Object.keys(variants['black']).includes(newSize) && <button onClick={()=>{refreshVariant("black",newSize)}} className="border-2 ${product.color === black? 'border-black':'border-gray-300'} ml-1 bg-black rounded-full w-6 h-6 focus:outline-none"></button>}
-                  {Object.keys(variants).includes('blue') && Object.keys(variants['blue']).includes(newSize) && <button onClick={()=>{refreshVariant("blue",newSize)}} className={`border-2 ${product.color === "blue"? 'border-black':'border-gray-300'} ml-1 bg-blue-500 rounded-full w-6 h-6 focus:outline-none`}></button>}
-                  {Object.keys(variants).includes('pink') && Object.keys(variants['pink']).includes(newSize) && <button onClick={()=>{refreshVariant("pink",newSize)}} className={`border-2 ${product.color === "pink"? 'border-black':'border-gray-300'} ml-1 bg-pink-500 rounded-full w-6 h-6 focus:outline-none`}></button>}
+                  {Object.keys(variants).includes('red') && Object.keys(variants['red']).includes(newSize) && <button onClick={() => { refreshVariant("red", newSize) }} className={`border-2 ${product.color === "red" ? 'border-black' : 'border-gray-300'} ml-1 bg-red-500 rounded-full w-6 h-6 focus:outline-none`}></button>}
+                  {Object.keys(variants).includes('green') && Object.keys(variants['green']).includes(newSize) && <button onClick={() => { refreshVariant("green", newSize) }} className={`border-2 ${product.color === "green" ? 'border-black' : 'border-gray-300'} ml-1 bg-green-500 rounded-full w-6 h-6 focus:outline-none`}></button>}
+                  {Object.keys(variants).includes('yellow') && Object.keys(variants['yellow']).includes(newSize) && <button onClick={() => { refreshVariant("yellow", newSize) }} className={`border-2 ${product.color === "yellow" ? 'border-black' : 'border-gray-300'} ml-1 bg-yellow-500 rounded-full w-6 h-6 focus:outline-none`}></button>}
+                  {Object.keys(variants).includes('black') && Object.keys(variants['black']).includes(newSize) && <button onClick={() => { refreshVariant("black", newSize) }} className="border-2 ${product.color === black? 'border-black':'border-gray-300'} ml-1 bg-black rounded-full w-6 h-6 focus:outline-none"></button>}
+                  {Object.keys(variants).includes('blue') && Object.keys(variants['blue']).includes(newSize) && <button onClick={() => { refreshVariant("blue", newSize) }} className={`border-2 ${product.color === "blue" ? 'border-black' : 'border-gray-300'} ml-1 bg-blue-500 rounded-full w-6 h-6 focus:outline-none`}></button>}
+                  {Object.keys(variants).includes('pink') && Object.keys(variants['pink']).includes(newSize) && <button onClick={() => { refreshVariant("pink", newSize) }} className={`border-2 ${product.color === "pink" ? 'border-black' : 'border-gray-300'} ml-1 bg-pink-500 rounded-full w-6 h-6 focus:outline-none`}></button>}
                 </div>
               </div>
               <div className="flex ml-6 items-center">
                 <span className="mr-3">Size</span>
                 <div className="relative">
-                  <select value={newSize} onChange={(e)=>{refreshVariant(newColor,e.target.value)}} className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-orange-200 focus:border-orange-500 text-base pl-3 pr-10">
+                  <select value={newSize} onChange={(e) => { refreshVariant(newColor, e.target.value) }} className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-orange-200 focus:border-orange-500 text-base pl-3 pr-10">
                     {Object.keys(variants[product.color]).includes('S') && <option value={'S'}>S</option>}
                     {Object.keys(variants[product.color]).includes('M') && <option value={'M'}>M</option>}
                     {Object.keys(variants[product.color]).includes('L') && <option value={'L'}>L</option>}
@@ -74,7 +95,7 @@ const Slug = ({ buyNow, addToCart, product, variants }) => {
             <div className="flex">
               <span className="title-font font-medium text-2xl text-gray-900">₹499</span>
               <button onClick={() => { addToCart(product.itemCode, 1, product.price, newColor, newSize, product.name) }} className="flex ml-5 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded">Add to Cart</button>
-              <button onClick={()=>{buyNow(product.itemCode, 1, product.price, newColor, newSize, product.name)}} className="flex ml-5 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded">Buy Now</button>
+              <button onClick={() => { buyNow(product.itemCode, 1, product.price, newColor, newSize, product.name) }} className="flex ml-5 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded">Buy Now</button>
 
             </div>
             <div className="flex mt-5">
@@ -82,7 +103,7 @@ const Slug = ({ buyNow, addToCart, product, variants }) => {
               <button onClick={handlePincode} className="flex ml-5 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded">Check Pincode</button>
             </div>
             <div className="msg my-2">
-              {(display != null && display) && <div><p className='text-red-600'>Hurray!! we deliver to this location</p></div>}
+              {(display != null && display) && <div><p className='text-green-600'>Hooray!! we deliver to this location</p></div>}
               {(display != null && !display) && <div><p className='text-red-600'>Sorry!! we do not deliver to this location</p></div>}
             </div>
           </div>
