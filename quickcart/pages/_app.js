@@ -7,8 +7,20 @@ import { useRouter } from "next/router";
 export default function App({ Component, pageProps }) {
   const [cart, setCart] = useState({});
   const [subTotal, setsubTotal] = useState(0)
+  const [user, setUser] = useState({value:null})
+  const [key, setKey] = useState()
   const router = useRouter();
-
+  
+  useEffect(() => {
+    try {
+      if(localStorage.getItem('token')){
+        setUser({value:localStorage.getItem('token')});
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }, [router.query]);
+  
   useEffect(() => {
     try {
       if(localStorage.getItem('cart')){
@@ -76,8 +88,8 @@ export default function App({ Component, pageProps }) {
   }
 
   return <>
-  <Navbar buyNow={buyNow} cart={cart} addToCart={addToCart} removeItemCart={removeItemCart} clearCart={clearCart} subTotal={subTotal} />
-  <Component buyNow={buyNow} cart={cart} addToCart={addToCart} removeItemCart={removeItemCart} clearCart={clearCart} subTotal={subTotal} {...pageProps} />
+  <Navbar buyNow={buyNow} user={user} cart={cart} addToCart={addToCart} removeItemCart={removeItemCart} clearCart={clearCart} subTotal={subTotal} />
+  <Component buyNow={buyNow} user={user} cart={cart} addToCart={addToCart} removeItemCart={removeItemCart} clearCart={clearCart} subTotal={subTotal} {...pageProps} />
   <Footer/>
   </>
 }

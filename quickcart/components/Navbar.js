@@ -1,5 +1,5 @@
 import React from 'react'
-import { GiHamburgerMenu } from "react-icons/gi";
+import { GiHamburgerMenu, GiLitCandelabra } from "react-icons/gi";
 import { FaShoppingCart } from "react-icons/fa";
 import { IoPersonCircleSharp } from "react-icons/io5";
 import { IoCloseCircle } from "react-icons/io5";
@@ -10,7 +10,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRef } from 'react';
 
-const Navbar = ({addToCart, cart, removeItemCart, clearCart, subTotal}) => {
+const Navbar = ({addToCart, user, setUser, cart, removeItemCart, clearCart, subTotal}) => {
   const ref = useRef()
   
   const handleCart = () =>{
@@ -40,14 +40,16 @@ const Navbar = ({addToCart, cart, removeItemCart, clearCart, subTotal}) => {
         </ul>
       </div>
       </div>
-      <div className="user flex space-x-2">
+      <div className="user flex space-x-2 items-center">
+      <div className="profile">
+        {user.value===null?<Link href={'/login'}><button type="button"  className="text-white bg-orange-500 hover:bg-orange-800 font-medium rounded-md text-sm px-2 py-1  dark:bg-orange-600 dark:hover:bg-orange-700">Login</button></Link> :
+        <IoPersonCircleSharp className='text-xl md:text-2xl cursor-pointer'/>}
+        </div>
         <div className="Cart " onClick={handleCart}>
           <FaShoppingCart className='text-xl md:text-2xl cursor-pointer'/>
         </div>
-        <div className="profile ">
-        <IoPersonCircleSharp className='text-xl md:text-2xl cursor-pointer'/>
-        </div>
       </div>
+      {/* sidebar  */}
       <div ref={ref} className="sidebar bg-orange-300 w-72 h-screen absolute top-0 right-0 translate-x-full transform transition-transform">
         <div className="header px-6  py-8 flex justify-center bg-orange-300 sticky top-0 ">
         <h1 className='text-xl font-semibold'>Shopping Cart</h1>
@@ -78,6 +80,12 @@ const Navbar = ({addToCart, cart, removeItemCart, clearCart, subTotal}) => {
           <button type="button" onClick={()=>{clearCart()}} className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Clear Cart</button>        
           </div>
         </footer>}
+      </div>
+      <div className="profile-dropdown">
+        <ul>
+          <li>Your Account</li>
+          <li>Your Account</li>
+        </ul>
       </div>
     </div>
     
