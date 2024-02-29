@@ -5,14 +5,16 @@ import { IoPersonCircleSharp } from "react-icons/io5";
 import { IoCloseCircle } from "react-icons/io5";
 import { AiOutlinePlusSquare } from "react-icons/ai";
 import { AiOutlineMinusSquare } from "react-icons/ai";
-
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
-const Navbar = ({addToCart, user, setUser, cart, removeItemCart, clearCart, subTotal}) => {
+const Navbar = ({addToCart, handleLogout, user, setUser, cart, removeItemCart, clearCart, subTotal}) => {
   const ref = useRef()
-  
+  const router = useRouter();
+  const [dropdown, setDropdown] = useState(false);
+
   const handleCart = () =>{
     if(ref.current.classList.contains('translate-x-full')){
       ref.current.classList.remove('translate-x-full');
@@ -23,6 +25,7 @@ const Navbar = ({addToCart, user, setUser, cart, removeItemCart, clearCart, subT
       ref.current.classList.remove('translate-x-0');
     }
   }
+
   return (
     <div className='nav flex bg-white justify-between items-center p-2 alg shadow-md sticky top-0  z-10 '>
       <div className="hamburger-icon md:hidden cursor-pointer">
@@ -43,7 +46,14 @@ const Navbar = ({addToCart, user, setUser, cart, removeItemCart, clearCart, subT
       <div className="user flex space-x-2 items-center">
       <div className="profile">
         {user.value===null?<Link href={'/login'}><button type="button"  className="text-white bg-orange-500 hover:bg-orange-800 font-medium rounded-md text-sm px-2 py-1  dark:bg-orange-600 dark:hover:bg-orange-700">Login</button></Link> :
-        <IoPersonCircleSharp className='text-xl md:text-2xl cursor-pointer'/>}
+        <IoPersonCircleSharp className='text-2xl md:text-3xl cursor-pointer' onMouseOver={()=>{setDropdown(true)}} onMouseLeave={()=>{setDropdown(false)}} />}
+        {dropdown && <div className="profile-dropdown  absolute right-8 top-9  bg-white px-4 rounded-md shadow-lg border-gray-200 border-2" onMouseOver={()=>{setDropdown(true)}} onMouseLeave={()=>{setDropdown(false)}} onClick={()=>{setDropdown(false)}} >
+        <ul>
+          <Link href={'/account'} ><li className='hover:text-orange-500 py-1'>Your Account</li></Link>
+          <Link href={'/orders'} ><li className='hover:text-orange-500 py-1'>Orders</li></Link>
+          <li className='cursor-pointer hover:text-orange-500 py-1' onClick={handleLogout}>Logout</li>
+        </ul>
+      </div>}
         </div>
         <div className="Cart " onClick={handleCart}>
           <FaShoppingCart className='text-xl md:text-2xl cursor-pointer'/>
@@ -81,12 +91,7 @@ const Navbar = ({addToCart, user, setUser, cart, removeItemCart, clearCart, subT
           </div>
         </footer>}
       </div>
-      <div className="profile-dropdown">
-        <ul>
-          <li>Your Account</li>
-          <li>Your Account</li>
-        </ul>
-      </div>
+      
     </div>
     
   )
