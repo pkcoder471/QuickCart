@@ -54,7 +54,7 @@ export default function App({ Component, pageProps }) {
     setsubTotal(Amount);
   }
 
-  const addToCart = (itemCode, qty, price, color, size, name) =>{
+  const addToCart = (itemCode, qty, price, color, size, name, img) =>{
     let myCart = cart;
 
     const allItemCodes = Object.keys(myCart);
@@ -64,16 +64,16 @@ export default function App({ Component, pageProps }) {
       
     }
     else{
-      myCart[itemCode]={qty, price, color, size, name};
+      myCart[itemCode]={qty, price, color, size, name, img};
     }
     setCart(myCart);
     saveCart(myCart);
   }
 
-  const buyNow = (itemCode, qty, price, color, size, name) =>{
+  const buyNow = (itemCode, qty, price, color, size, name, img) =>{
     clearCart();
     let myCart={};
-    myCart[itemCode]={qty, price, color, size, name};
+    myCart[itemCode]={qty, price, color, size, name, img};
     setCart(myCart);
     saveCart(myCart);
     router.push('/checkout');

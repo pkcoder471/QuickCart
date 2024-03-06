@@ -17,7 +17,7 @@ const Slug = ({ buyNow, addToCart, product, variants }) => {
   }
 
   const handlePincode = async () => {
-    const response = await fetch('http://localhost:3000/api/pincode');
+    const response = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/api/pincode`);
     const json = await response.json();
 
     if (json.includes(parseInt(pincode))) {
@@ -47,7 +47,7 @@ const Slug = ({ buyNow, addToCart, product, variants }) => {
   }
 
   const refreshVariant = (newColor, newSize) => {
-    const url = `http://localhost:3000/product/${variants[newColor][newSize].slug}`;
+    const url = `${process.env.NEXT_PUBLIC_HOST_URL}/product/${variants[newColor][newSize].slug}`;
     window.location = url;
   }
 
@@ -94,8 +94,8 @@ const Slug = ({ buyNow, addToCart, product, variants }) => {
             </div>
             <div className="flex">
               <span className="title-font font-medium text-2xl text-gray-900">₹{product.price}</span>
-              <button onClick={() => { addToCart(product.itemCode, 1, product.price, newColor, newSize, product.name) }} className="flex ml-5 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded">Add to Cart</button>
-              <button onClick={() => { buyNow(product.itemCode, 1, product.price, newColor, newSize, product.name) }} className="flex ml-5 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded">Buy Now</button>
+              <button onClick={() => { addToCart(product.itemCode, 1, product.price, newColor, newSize, product.name, product.img) }} className="flex ml-5 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded">Add to Cart</button>
+              <button onClick={() => { buyNow(product.itemCode, 1, product.price, newColor, newSize, product.name, product.img) }} className="flex ml-5 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded">Buy Now</button>
 
             </div>
             <div className="flex mt-5">

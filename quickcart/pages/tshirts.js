@@ -41,7 +41,7 @@ const tshirts = ({products}) => {
 }
 
 export async function getServerSideProps() { 
-  const response = await fetch("http://localhost:3000/api/getTshirts", {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/api/getTshirts`, {
     method: "GET",
   });
   const json = await response.json();

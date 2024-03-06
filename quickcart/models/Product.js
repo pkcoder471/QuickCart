@@ -26,9 +26,11 @@ const ProductSchema = new Schema({
     },
     color:{
         type: String,
+        default:""
     },
     size:{
         type: String,
+        default:""
     },
     qty:{
         type: Number,

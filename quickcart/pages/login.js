@@ -11,7 +11,7 @@ const login = () => {
   const [credentials, setcredentials] = useState({ email: "", password: "" });
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch(`http://localhost:3000/api/login`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/api/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

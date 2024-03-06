@@ -2,7 +2,7 @@ import connectToDb from '@/middleware/mongoose';
 import User from '@/models/User';
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const JWT_SECRET = "blahsomething";
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const handler = async (req, res) => {
 

@@ -19,21 +19,21 @@ const mugs = ({products}) => {
             <h2 className="text-gray-900 title-font text-lg font-medium">{item.name}</h2>
             <p className="mt-1">₹{item.price}</p>
           </div>
-          <div className="sizes mt-1">
+          {item.size.length>0 && <div className="sizes mt-1">
             {item.size.includes('S') && <span className="sz border border-gray-500 px-1">S</span>}
             {item.size.includes('M') && <span className="sz border border-gray-500 px-1">M</span>}
             {item.size.includes('L') && <span className="sz border border-gray-500 px-1">L</span>}
             {item.size.includes('XL') && <span className="sz border border-gray-500 px-1">XL</span>}
             {item.size.includes('XXL') && <span className="sz border border-gray-500 px-1">XXL</span>}
-          </div>
-          <div className="colors mt-1">
+          </div>}
+          {item.color.length>0 && <div className="colors mt-1">
             {item.color.includes('red') && <button className="border-2 border-gray-300 ml-1 bg-red-500 rounded-full w-6 h-6 focus:outline-none"></button>}
             {item.color.includes('green') && <button className="border-2 border-gray-300 ml-1 bg-green-500 rounded-full w-6 h-6 focus:outline-none"></button>}
             {item.color.includes('yellow') && <button className="border-2 border-gray-300 ml-1 bg-yellow-500 rounded-full w-6 h-6 focus:outline-none"></button>}
             {item.color.includes('black') && <button className="border-2 border-gray-300 ml-1 bg-black rounded-full w-6 h-6 focus:outline-none"></button>}
             {item.color.includes('blue') && <button className="border-2 border-gray-300 ml-1 bg-blue-500 rounded-full w-6 h-6 focus:outline-none"></button>}
             {item.color.includes('pink') && <button className="border-2 border-gray-300 ml-1 bg-pink-500 rounded-full w-6 h-6 focus:outline-none"></button>}
-          </div>
+          </div>}
         </div></Link>})}
       </div>
     </div>
@@ -46,7 +46,6 @@ export async function getServerSideProps() {
     await mongoose.connect(process.env.MONGO_URL);
   }
   let products = await Product.find({"category":"Mugs"});
-  console.log(products);
   return { 
       props: { products: JSON.parse(JSON.stringify(products)) }, 
   }; 

@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRef, useState } from 'react';
+import Product from '@/models/Product';
 
 const Navbar = ({addToCart, handleLogout, user, setUser, cart, removeItemCart, clearCart, subTotal}) => {
   const ref = useRef()
@@ -72,7 +73,7 @@ const Navbar = ({addToCart, handleLogout, user, setUser, cart, removeItemCart, c
           {Object.keys(cart).length!=0 && Object.keys(cart).map((item)=>{
           return <div key={item} className='item bg-white h-32 w-[80%] shadow-md rounded-sm flex flex-col'>
             <div className='desc h-[60%] flex flex-row items-center '>
-               <div className="image w-[30%] p-3 "><img alt="ecommerce"  className="h-[100%] w-[100%] m-auto block" src="https://m.media-amazon.com/images/I/61b4R3TMXoL._SY879_.jpg"/></div>
+               <div className="image w-[30%] p-3 "><img alt="ecommerce"  className="h-[100%] w-[100%] m-auto block" src={cart[item].img}/></div>
                <div className="item-desc text-xs w-[50%] p-3">{cart[item].name}({cart[item].size}/{cart[item].color})</div>
                <div className="qty w-[30%] flex space-x-1 items-center">
                 <span className='cursor-pointer' onClick={()=>{removeItemCart(item,1)}} ><AiOutlineMinusSquare/></span>
