@@ -87,8 +87,8 @@ const Navbar = ({addToCart, handleLogout, user, setUser, cart, removeItemCart, c
         {Object.keys(cart).length!==0 && <footer className='totalSum flex items-center flex-col space-y-2 p-3'>
           <p className='font-semibold'>Total Amount: ₹{subTotal}</p>
           <div>
-          <Link href={'/checkout'}><button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">CheckOut</button></Link>
-          <button type="button" onClick={()=>{clearCart()}} className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Clear Cart</button>        
+          <Link href={'/checkout'}><button type="button" className="text-white bg-orange-700 hover:bg-orange-800 focus:outline-none focus:ring-4 focus:ring-orange-300 font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">CheckOut</button></Link>
+          <button type="button" onClick={()=>{clearCart()}} className="text-white bg-orange-700 hover:bg-orange-800 focus:outline-none focus:ring-4 focus:ring-orange-300 font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">Clear Cart</button>        
           </div>
         </footer>}
       </div>
