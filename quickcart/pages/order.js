@@ -15,7 +15,7 @@ const orders = ({order}) => {
         <div className="flex mb-4">
           <a className="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">Item Description</a>
           <a className="flex-grow border-b-2 border-gray-300 text-end py-2 text-lg px-1">Quantity</a>
-          <a className="flex-grow border-b-2 border-gray-300 text-end py-2 text-lg px-1">Item Total</a>
+          <a className="flex-grow border-b-2 border-gray-300 text-end py-2 text-lg px-1">Item Price</a>
         </div>
         {Object.keys(order.products).map((item)=>{
           return <div key={item} className="flex border-b border-gray-200 py-1">
