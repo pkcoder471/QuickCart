@@ -13,7 +13,7 @@ const handler = async (req, res) => {
 
     if (generated_signature == razorpay_signature) {
         await Order.findOneAndUpdate({orderId:razorpay_order_id},{status:"PAID",paymentInfo:req.body});
-        res.redirect('/order',200)
+        res.redirect(`/order?id=${razorpay_order_id}`,200)
         return res.status(200).json({ "success": true })
     }
     else{
