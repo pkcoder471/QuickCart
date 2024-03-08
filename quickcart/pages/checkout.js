@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { AiOutlinePlusSquare } from "react-icons/ai";
 import { AiOutlineMinusSquare } from "react-icons/ai";
 import Script from 'next/script';
@@ -63,6 +63,22 @@ const checkout = ({ addToCart, cart, removeItemCart, subTotal }) => {
     const razor = new window.Razorpay(options);
     razor.open();
   }
+
+  const [credentials, setcredentials] = useState({name:"", email:"", address:"", phone:"", city:"", state:"", pincode:"" });
+  const [disabled, setdisabled] = useState(true)
+
+  const handleChange = (e) =>{
+    e.preventDefault();
+    setcredentials({...credentials, [e.target.name]:e.target.value})
+
+    if(credentials.name.length>3 && credentials.email.length>3 && credentials.address.length>3 && credentials.phone.length==10 && credentials.pincode.length>3){
+      setdisabled(false);
+    }
+    else{
+      setdisabled(true);
+    }
+    
+  }
   return (
     <div className='container flex flex-col items-center md:px-48 px-5'>
       <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
@@ -72,32 +88,33 @@ const checkout = ({ addToCart, cart, removeItemCart, subTotal }) => {
         <form className='flex flex-row flex-wrap'>
           <div className='flex flex-col  w-1/2 my-2'>
             <label htmlFor="name">Name</label>
-            <input type='text' className='w-[90%] border-2 border-gray-400 focus:outline-none rounded px-2 py-1' id='name' name='name' />
+            <input type='text' onChange={handleChange} value={credentials.name} className='w-[90%] border-2 border-gray-400 focus:outline-none rounded px-2 py-1' id='name' name='name' />
           </div>
           <div className='flex flex-col w-1/2 my-2'>
             <label htmlFor="email">Email</label>
-            <input type='email' className='w-[90%] border-2 border-gray-400 focus:outline-none rounded px-2 py-1' id='email' name='email' />
+            <input type='email' onChange={handleChange} value={credentials.email} className='w-[90%] border-2 border-gray-400 focus:outline-none rounded px-2 py-1' id='email' name='email' />
           </div >
           <div className='flex flex-col w-full my-2'>
             <label htmlFor="address">Address</label>
-            <textarea type='text' className='w-[95%] border-2 border-gray-400 focus:outline-none rounded px-2 py-1' rows={3} id='address' name='address' />
+            <textarea type='text' onChange={handleChange} value={credentials.address} className='w-[95%] border-2 border-gray-400 focus:outline-none rounded px-2 py-1' rows={3} id='address' name='address' />
           </div>
           <div className='flex flex-col  w-1/2 my-2'>
             <label htmlFor="Phone">Phone</label>
-            <input type='tel' className='w-[90%] border-2 border-gray-400 focus:outline-none rounded px-2 py-1' id='Phone' name='Phone' />
-          </div>
-          <div className='flex flex-col w-1/2 my-2'>
-            <label htmlFor="City">City</label>
-            <input type='text' className='w-[90%] border-2 border-gray-400 focus:outline-none rounded px-2 py-1' id='City' name='City' />
-          </div >
-          <div className='flex flex-col  w-1/2 my-2'>
-            <label htmlFor="State">State</label>
-            <input type='text' className='w-[90%] border-2 border-gray-400 focus:outline-none rounded px-2 py-1' id='State' name='State' />
+            <input type='tel' onChange={handleChange} value={credentials.phone} className='w-[90%] border-2 border-gray-400 focus:outline-none rounded px-2 py-1' id='Phone' name='phone' />
           </div>
           <div className='flex flex-col w-1/2 my-2'>
             <label htmlFor="Pincode">Pincode</label>
-            <input type='text' className='w-[90%] border-2 border-gray-400 focus:outline-none rounded px-2 py-1' id='Pincode' name='Pincode' />
+            <input type='text' onChange={handleChange} value={credentials.pincode} className='w-[90%] border-2 border-gray-400 focus:outline-none rounded px-2 py-1' id='Pincode' name='pincode' />
           </div >
+          <div className='flex flex-col w-1/2 my-2'>
+            <label htmlFor="City">City</label>
+            <input type='text' onChange={handleChange} value={credentials.city} className='w-[90%] border-2 border-gray-400 focus:outline-none rounded px-2 py-1' id='City' name='city' />
+          </div >
+          <div className='flex flex-col  w-1/2 my-2'>
+            <label htmlFor="State">State</label>
+            <input type='text' onChange={handleChange} value={credentials.state} className='w-[90%] border-2 border-gray-400 focus:outline-none rounded px-2 py-1' id='State' name='state' />
+          </div>
+          
 
         </form>
       </div>
@@ -122,7 +139,7 @@ const checkout = ({ addToCart, cart, removeItemCart, subTotal }) => {
           })}
         </main>
         {Object.keys(cart).length !== 0 && <div className='totalSum mt-5'>
-          <button type="button" onClick={PaymentHandler} className="text-white bg-orange-700 hover:bg-orange-800 focus:outline-none focus:ring-4 focus:ring-orange-300 font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">Pay ₹{subTotal}</button>  </div>}
+          <button type="button" disabled={disabled} onClick={PaymentHandler} className="text-white bg-orange-700 disabled:bg-orange-300 disabled:hover:bg-none hover:bg-orange-800 focus:outline-none focus:ring-4 focus:ring-orange-300 font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">Pay ₹{subTotal}</button>  </div>}
       </div>
     </div>
   )
