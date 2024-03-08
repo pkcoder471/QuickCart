@@ -5,15 +5,19 @@ import Script from 'next/script';
 
 const checkout = ({ addToCart, cart, removeItemCart, subTotal }) => {
 
+  const [credentials, setcredentials] = useState({name:"", email:"", address:"", phone:"", city:"", state:"", pincode:"" });
+  const [disabled, setdisabled] = useState(true)
 
   const PaymentHandler = async () => {
+
+    const {name, email, address, phone, city, state, pincode } = credentials;
 
     const response = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/api/checkout`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ subTotal })
+      body: JSON.stringify({ subTotal, cart, name, email, address, phone, city, state, pincode })
     })
     const order = await response.json();
 
@@ -25,7 +29,7 @@ const checkout = ({ addToCart, cart, removeItemCart, subTotal }) => {
       "description": "Test Transaction",
       "image": "https://m.media-amazon.com/images/I/51faXrq-8TL._SX679_.jpg",
       "order_id": order.id,
-      "callback_url": "http://localhost:3000/api/paymentverification",
+      "callback_url": `http://localhost:3000/api/paymentverification`,
       "prefill": {
         "name": "Gaurav Kumar",
         "email": "gaurav.kumar@example.com",
@@ -64,8 +68,7 @@ const checkout = ({ addToCart, cart, removeItemCart, subTotal }) => {
     razor.open();
   }
 
-  const [credentials, setcredentials] = useState({name:"", email:"", address:"", phone:"", city:"", state:"", pincode:"" });
-  const [disabled, setdisabled] = useState(true)
+  
 
   const handleChange = (e) =>{
     e.preventDefault();
@@ -139,7 +142,7 @@ const checkout = ({ addToCart, cart, removeItemCart, subTotal }) => {
           })}
         </main>
         {Object.keys(cart).length !== 0 && <div className='totalSum mt-5'>
-          <button type="button" disabled={disabled} onClick={PaymentHandler} className="text-white bg-orange-700 disabled:bg-orange-300 disabled:hover:bg-none hover:bg-orange-800 focus:outline-none focus:ring-4 focus:ring-orange-300 font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">Pay ₹{subTotal}</button>  </div>}
+          <button type="button" disabled={disabled} onClick={PaymentHandler} className="text-white bg-orange-700 disabled:bg-orange-300 focus:outline-none focus:ring-4font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2 ">Pay ₹{subTotal}</button>  </div>}
       </div>
     </div>
   )

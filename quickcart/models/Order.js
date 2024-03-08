@@ -2,28 +2,29 @@ const mongoose = require('mongoose');
 
 const {Schema} = mongoose;
 
-const ProductSchema = new Schema({
-    userId:{
+const OrderSchema = new Schema({
+    email:{
         type: String,
         required:true,
     },
-    products:[{
-        productId:{
-            type:String,
+    orderId:{
+        type: String,
+        required:true,
+    },
+    paymentInfo:{
+        type: Object,
+        default:""
+    },
+    products:{
+            type:Object,
             required:true
-        },
-        qty:{
-            type: Number,
-            required:true 
-        }
-    }],
-    Amount:{
+    },
+    amount:{
         type: Number,
         required:true
     },
     status:{
         type:String,
-        required:true,
         default:"Pending"
     },
     address:{
@@ -36,4 +37,4 @@ const ProductSchema = new Schema({
 })
 
 mongoose.models={};
-export default mongoose.model('Product',ProductSchema);
+export default mongoose.model('Order',OrderSchema);
