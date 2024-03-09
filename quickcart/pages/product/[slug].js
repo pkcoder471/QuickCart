@@ -20,7 +20,7 @@ const Slug = ({ buyNow, addToCart, product, variants }) => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/api/pincode`);
     const json = await response.json();
 
-    if (json.includes(parseInt(pincode))) {
+    if (Object.keys(json).includes(pincode)) {
       setDisplay(true);
       toast.success('Hooray, Pincode servicable', {
         position: "bottom-center",
@@ -99,7 +99,7 @@ const Slug = ({ buyNow, addToCart, product, variants }) => {
 
             </div>
             <div className="flex mt-5">
-              <input type='number' onChange={handleChange} className='pincode border-2 border-gray-400 focus:outline-none rounded px-2' placeholder='Enter your Pincode' name='pincode'  ></input>
+              <input type='text' onChange={handleChange} className='pincode border-2 border-gray-400 focus:outline-none rounded px-2' placeholder='Enter your Pincode' name='pincode'  ></input>
               <button onClick={handlePincode} className="flex ml-5 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded">Check Pincode</button>
             </div>
             <div className="msg my-2">

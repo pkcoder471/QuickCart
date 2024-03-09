@@ -1,16 +1,23 @@
 import React, { useState } from 'react'
 import { AiOutlinePlusSquare } from "react-icons/ai";
 import { AiOutlineMinusSquare } from "react-icons/ai";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Script from 'next/script';
 
 const checkout = ({ addToCart, cart, removeItemCart, subTotal }) => {
 
-  const [credentials, setcredentials] = useState({name:"", email:"", address:"", phone:"", city:"", state:"", pincode:"" });
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [pincode, setPincode] = useState("");
+
   const [disabled, setdisabled] = useState(true)
 
   const PaymentHandler = async () => {
-
-    const {name, email, address, phone, city, state, pincode } = credentials;
 
     const response = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/api/checkout`, {
       method: 'POST',
@@ -70,11 +77,53 @@ const checkout = ({ addToCart, cart, removeItemCart, subTotal }) => {
 
   
 
-  const handleChange = (e) =>{
+  const handleChange = async (e) =>{
     e.preventDefault();
-    setcredentials({...credentials, [e.target.name]:e.target.value})
 
-    if(credentials.name.length>3 && credentials.email.length>3 && credentials.address.length>3 && credentials.phone.length==10 && credentials.pincode.length>3){
+    if(e.target.name=='name') setName(e.target.value);
+    if(e.target.name=='address') setAddress(e.target.value);
+    if(e.target.name=='email') setEmail(e.target.value);
+    if(e.target.name=='phone') setPhone(e.target.value);
+    if(e.target.name=='pincode'){
+      setPincode(e.target.value);
+      if(e.target.value.length==6){
+        const response = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/api/pincode`);
+        const json = await response.json();
+        if (Object.keys(json).includes(e.target.value)) {
+          setCity(json[e.target.value][0]);
+          setState(json[e.target.value][1]);
+          toast.success('Hooray, Pincode servicable', {
+            position: "top-left",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            });
+        }
+        else {
+          toast.error('Sorry, Pincode not servicable', {
+            position: "top-left",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            });
+        }
+  
+      }
+      else{
+        setCity('');
+        setState('');
+      }
+    }
+
+    
+
+    if(name.length>3 && email.length>3 && address.length>3 && phone.length==10 && pincode.length==6){
       setdisabled(false);
     }
     else{
@@ -84,6 +133,7 @@ const checkout = ({ addToCart, cart, removeItemCart, subTotal }) => {
   }
   return (
     <div className='container flex flex-col items-center md:px-48 px-5'>
+      <ToastContainer/>
       <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
       <h1 className='md:text-3xl text-2xl font-bold mt-10'>Checkout</h1>
       <div className="details w-full">
@@ -91,31 +141,31 @@ const checkout = ({ addToCart, cart, removeItemCart, subTotal }) => {
         <form className='flex flex-row flex-wrap'>
           <div className='flex flex-col  w-1/2 my-2'>
             <label htmlFor="name">Name</label>
-            <input type='text' onChange={handleChange} value={credentials.name} className='w-[90%] border-2 border-gray-400 focus:outline-none rounded px-2 py-1' id='name' name='name' />
+            <input type='text' onChange={handleChange} value={name} className='w-[90%] border-2 border-gray-300 focus:outline-none rounded px-2 py-1' id='name' name='name' />
           </div>
           <div className='flex flex-col w-1/2 my-2'>
             <label htmlFor="email">Email</label>
-            <input type='email' onChange={handleChange} value={credentials.email} className='w-[90%] border-2 border-gray-400 focus:outline-none rounded px-2 py-1' id='email' name='email' />
+            <input type='email' onChange={handleChange} value={email} className='w-[90%] border-2 border-gray-300 focus:outline-none rounded px-2 py-1' id='email' name='email' />
           </div >
           <div className='flex flex-col w-full my-2'>
             <label htmlFor="address">Address</label>
-            <textarea type='text' onChange={handleChange} value={credentials.address} className='w-[95%] border-2 border-gray-400 focus:outline-none rounded px-2 py-1' rows={3} id='address' name='address' />
+            <textarea type='text' onChange={handleChange} value={address} className='w-[95%] border-2 border-gray-300 focus:outline-none rounded px-2 py-1' rows={3} id='address' name='address' />
           </div>
           <div className='flex flex-col  w-1/2 my-2'>
             <label htmlFor="Phone">Phone</label>
-            <input type='tel' onChange={handleChange} value={credentials.phone} className='w-[90%] border-2 border-gray-400 focus:outline-none rounded px-2 py-1' id='Phone' name='phone' />
+            <input type='tel' onChange={handleChange} value={phone} className='w-[90%] border-2 border-gray-300 focus:outline-none rounded px-2 py-1' id='Phone' name='phone' />
           </div>
           <div className='flex flex-col w-1/2 my-2'>
             <label htmlFor="Pincode">Pincode</label>
-            <input type='text' onChange={handleChange} value={credentials.pincode} className='w-[90%] border-2 border-gray-400 focus:outline-none rounded px-2 py-1' id='Pincode' name='pincode' />
+            <input type='text' onChange={handleChange} value={pincode} className='w-[90%] border-2 border-gray-300 focus:outline-none rounded px-2 py-1' id='Pincode' name='pincode' />
           </div >
           <div className='flex flex-col w-1/2 my-2'>
             <label htmlFor="City">City</label>
-            <input type='text' onChange={handleChange} value={credentials.city} className='w-[90%] border-2 border-gray-400 focus:outline-none rounded px-2 py-1' id='City' name='city' />
+            <input type='text' onChange={handleChange} value={city} className='w-[90%] border-2 border-gray-300 focus:outline-none rounded px-2 py-1' id='City' name='city' readOnly />
           </div >
           <div className='flex flex-col  w-1/2 my-2'>
             <label htmlFor="State">State</label>
-            <input type='text' onChange={handleChange} value={credentials.state} className='w-[90%] border-2 border-gray-400 focus:outline-none rounded px-2 py-1' id='State' name='state' />
+            <input type='text' onChange={handleChange} value={state} className='w-[90%] border-2 border-gray-300 focus:outline-none rounded px-2 py-1' id='State' name='state' readOnly />
           </div>
           
 
@@ -142,7 +192,7 @@ const checkout = ({ addToCart, cart, removeItemCart, subTotal }) => {
           })}
         </main>
         {Object.keys(cart).length !== 0 && <div className='totalSum mt-5'>
-          <button type="button" disabled={disabled} onClick={PaymentHandler} className="text-white bg-orange-700 disabled:bg-orange-300 focus:outline-none focus:ring-4font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2 ">Pay ₹{subTotal}</button>  </div>}
+          <button type="button" disabled={disabled} onClick={PaymentHandler} className="text-white bg-orange-500 disabled:bg-orange-300 focus:outline-none focus:ring-4font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2 ">Pay ₹{subTotal}</button>  </div>}
       </div>
     </div>
   )
