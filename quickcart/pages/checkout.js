@@ -111,7 +111,7 @@ const checkout = ({ addToCart, cart, removeItemCart, subTotal, clearCart}) => {
     }
   }
 
-
+  
 
   const handleChange = async (e) => {
     e.preventDefault();

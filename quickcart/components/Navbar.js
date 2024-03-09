@@ -8,14 +8,18 @@ import { AiOutlineMinusSquare } from "react-icons/ai";
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRef, useState } from 'react';
-import Product from '@/models/Product';
+import { useRef, useState, useEffect } from 'react';
 
-const Navbar = ({addToCart, handleLogout, user, setUser, cart, removeItemCart, clearCart, subTotal}) => {
+const Navbar = ({addToCart, handleLogout, user, cart, removeItemCart, clearCart, subTotal}) => {
   const ref = useRef()
   const router = useRouter();
   const [dropdown, setDropdown] = useState(false);
-
+  useEffect(() => {
+    if(router.pathname=='/checkout'){
+      handleCart();
+    }
+  }, [router.query]);
+  
   const handleCart = () =>{
     if(ref.current.classList.contains('translate-x-full')){
       ref.current.classList.remove('translate-x-full');

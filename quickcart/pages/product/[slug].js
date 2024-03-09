@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import React, { useState, useEffect} from 'react'
 import Product from '@/models/Product';
 import mongoose from 'mongoose';
 import { ToastContainer, toast } from 'react-toastify';
@@ -12,6 +12,11 @@ const Slug = ({ buyNow, addToCart, product, variants }) => {
   const [newColor, setnewColor] = useState(product.color);
   const [newSize, setnewSize] = useState(product.size);
 
+  useEffect(() => {
+    setnewColor(product.color);
+    setnewSize(product.size);
+  }, [router.query])
+  
   const handleChange = (e) => {
     setPincode(e.target.value);
   }
@@ -45,7 +50,19 @@ const Slug = ({ buyNow, addToCart, product, variants }) => {
         });
     }
   }
+  const handleaddToCart = () =>{
 
+    addToCart(product.itemCode, 1, product.price, newColor, newSize, product.name, product.img) 
+    toast.success('Item added to cart', {
+      position: "top-left",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      });
+  }
   const refreshVariant = (newColor, newSize) => {
     const url = `${process.env.NEXT_PUBLIC_HOST_URL}/product/${variants[newColor][newSize].slug}`;
     router.push(url);
@@ -94,7 +111,7 @@ const Slug = ({ buyNow, addToCart, product, variants }) => {
             </div>
             <div className="flex">
               <span className="title-font font-medium text-2xl text-gray-900">₹{product.price}</span>
-              <button disabled={product.qty<=0} onClick={() => { addToCart(product.itemCode, 1, product.price, newColor, newSize, product.name, product.img) }} className="flex ml-5 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded">Add to Cart</button>
+              <button disabled={product.qty<=0} onClick={handleaddToCart} className="flex ml-5 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded">Add to Cart</button>
               <button disabled={product.qty<=0} onClick={() => { buyNow(product.itemCode, 1, product.price, newColor, newSize, product.name, product.img) }} className="flex ml-5 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded">Buy Now</button>
 
             </div>

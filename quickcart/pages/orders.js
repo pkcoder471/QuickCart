@@ -91,7 +91,7 @@ const orders = () => {
                   </td></Link>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <p className="text-gray-900 whitespace-no-wrap">
-                      {Date.now(item.createdAt)}
+                    {new Date(item.createdAt).toLocaleDateString("en-US",{year:"numeric",day:"numeric",month:"long"})}
                     </p>
                   </td>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">

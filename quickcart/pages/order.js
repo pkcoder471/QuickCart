@@ -1,15 +1,19 @@
-import React,{useEffect} from 'react'
+import React,{useEffect, useState} from 'react'
 import Order from '@/models/Order';
 import mongoose from 'mongoose';
 import { useRouter } from 'next/router';
 
-const Order = ({order,clearCart}) => {
+const order = ({order,clearCart}) => {
+  const [date, setDate] = useState()
   const router = useRouter();
   useEffect(() => {
     if(router.query.clearCart==1){
       clearCart();
     }
+    const date = new Date(order.createdAt);
+    setDate(date);
   }, [])
+
   
   return (
     <section className="text-gray-600 body-font overflow-hidden">
@@ -19,7 +23,8 @@ const Order = ({order,clearCart}) => {
         <h2 className="text-sm title-font text-gray-500 tracking-widest">QUICKCART.COM</h2>
         <h1 className="text-gray-900 md:text-3xl text-2xl title-font font-medium mb-4">Order Id: #{order.orderId}</h1>
         <p>Your Order has been successfully placed!</p>
-        <p>Payment stauts:<span className='font-semibold'>{order.status}</span></p>
+        <p>Order Placed on : {date && date.toLocaleDateString("en-US",{year:"numeric",day:"numeric",month:"long"})}</p>
+        <p>Payment stauts : <span className='font-semibold'>{order.status}</span></p>
         <div className="flex mb-4">
           <a className="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">Item Description</a>
           <a className="flex-grow border-b-2 border-gray-300 text-end py-2 text-lg px-1">Quantity</a>
@@ -57,4 +62,4 @@ export async function getServerSideProps(context) {
   }; 
 }
 
-export default Order
+export default order
