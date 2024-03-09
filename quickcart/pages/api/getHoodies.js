@@ -17,11 +17,9 @@ const handler = async (req,res) =>{
                 }
             }
             else{
-                if(item.qty>0){
                     hoodies[item.name]=JSON.parse(JSON.stringify(item));
                     hoodies[item.name].color=[item.color];
                     hoodies[item.name].size=[item.size];
-                }
             }
         }
         return res.status(200).json(hoodies);

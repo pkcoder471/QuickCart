@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Slug = ({ buyNow, addToCart, product, variants }) => {
   const router = useRouter();
+  console.log(product);
   const [pincode, setPincode] = useState()
   const [display, setDisplay] = useState()
   const [newColor, setnewColor] = useState(product.color);
@@ -79,7 +80,7 @@ const Slug = ({ buyNow, addToCart, product, variants }) => {
             <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">{product.name}({product.size}/{product.color})</h1>
 
             <p className="leading-relaxed">{product.desc}</p>
-            <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
+            <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-2">
               <div className="flex items-center">
                 <span className="mr-1">Color :</span>
                 <div className="colors mt-1">
@@ -109,15 +110,16 @@ const Slug = ({ buyNow, addToCart, product, variants }) => {
                 </div>
               </div>
             </div>
+            {product.qty<=0 && <div className='font-semibold text-xl mb-2'>Out of Stock!</div>}
             <div className="flex">
               <span className="title-font font-medium text-2xl text-gray-900">₹{product.price}</span>
-              <button disabled={product.qty<=0} onClick={handleaddToCart} className="flex ml-5 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded">Add to Cart</button>
-              <button disabled={product.qty<=0} onClick={() => { buyNow(product.itemCode, 1, product.price, newColor, newSize, product.name, product.img) }} className="flex ml-5 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded">Buy Now</button>
+              <button type='button' disabled={product.qty<=0}  onClick={handleaddToCart} className="flex ml-5 md:px-6 px-3 disabled:bg-orange-300 text-white md:text-sm text-xs  bg-orange-500 border-0 py-2 focus:outline-none hover:bg-orange-600 rounded">Add to Cart</button>
+              <button disabled={product.qty<=0} onClick={() => { buyNow(product.itemCode, 1, product.price, newColor, newSize, product.name, product.img) }} className="flex ml-5 text-white md:text-sm text-xs md:px-6 px-3 disabled:bg-orange-300 bg-orange-500 border-0 py-2  focus:outline-none hover:bg-orange-600 rounded">Buy Now</button>
 
             </div>
             <div className="flex mt-5">
               <input type='text' onChange={handleChange} className='pincode border-2 border-gray-400 focus:outline-none rounded px-2' placeholder='Enter your Pincode' name='pincode'  ></input>
-              <button onClick={handlePincode} className="flex ml-5 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded">Check Pincode</button>
+              <button onClick={handlePincode} className="flex ml-5 text-white bg-orange-500 border-0 py-2 md:px-6 px-3 md:text-sm text-xs focus:outline-none hover:bg-orange-600 rounded">Check Pincode</button>
             </div>
             <div className="msg my-2">
               {(display != null && display) && <div><p className='text-green-600'>Hooray!! we deliver to this location</p></div>}
