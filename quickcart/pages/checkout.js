@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { AiOutlinePlusSquare } from "react-icons/ai";
 import { AiOutlineMinusSquare } from "react-icons/ai";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Script from 'next/script';
+import { useRouter } from 'next/router';
 
-const checkout = ({ addToCart, cart, removeItemCart, subTotal, clearCart }) => {
+const checkout = ({ addToCart, cart, removeItemCart, subTotal, clearCart, user }) => {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -16,7 +17,19 @@ const checkout = ({ addToCart, cart, removeItemCart, subTotal, clearCart }) => {
   const [pincode, setPincode] = useState("");
 
   const [disabled, setdisabled] = useState(true)
+  const router = useRouter();
 
+  useEffect(() => {
+    if(!localStorage.getItem('token')){
+      console.log('dsfsa');
+      router.push('/login');
+    }
+    else{
+      setEmail(user.value.email);
+      console.log('gegg');
+    }
+  }, [])
+  
   const PaymentHandler = async () => {
 
     const response = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/api/checkout`, {
@@ -97,7 +110,6 @@ const checkout = ({ addToCart, cart, removeItemCart, subTotal, clearCart }) => {
 
     if (e.target.name == 'name') setName(e.target.value);
     if (e.target.name == 'address') setAddress(e.target.value);
-    if (e.target.name == 'email') setEmail(e.target.value);
     if (e.target.name == 'phone') setPhone(e.target.value);
     if (e.target.name == 'pincode') {
       setPincode(e.target.value);
@@ -160,7 +172,7 @@ const checkout = ({ addToCart, cart, removeItemCart, subTotal, clearCart }) => {
           </div>
           <div className='flex flex-col w-1/2 my-2'>
             <label htmlFor="email">Email</label>
-            <input type='email' onChange={handleChange} value={email} className='w-[90%] border-2 border-gray-300 focus:outline-none rounded px-2 py-1' id='email' name='email' />
+            <input type='email' onChange={handleChange} value={email} className='w-[90%] border-2 border-gray-300 focus:outline-none rounded px-2 py-1' id='email' name='email' readOnly/>
           </div >
           <div className='flex flex-col w-full my-2'>
             <label htmlFor="address">Address</label>

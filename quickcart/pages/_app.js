@@ -21,7 +21,19 @@ export default function App({ Component, pageProps }) {
     })
     try {
       if(localStorage.getItem('token')){
-        setUser({value:localStorage.getItem('token')});
+        const getUser = async () =>{
+          const response = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/api/getUser`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ 'token':localStorage.getItem('token')})
+          })
+          const json = await response.json();
+          setUser({value:json});
+        }
+        getUser();
+        
       }
     } catch (err) {
       console.log(err);
