@@ -6,7 +6,7 @@ import Razorpay from 'razorpay';
 const handler = async (req, res) => {
 
     let success = false;
-    const {email, address, subTotal, cart} = req.body;
+    const {email, name, address, phone, pincode, subTotal, cart} = req.body;
     try {
         if (req.method === 'POST') {
 
@@ -25,6 +25,13 @@ const handler = async (req, res) => {
                 return res.status(200).json({ success, "error": "Price of some item have changed, Please try again!" })
             }
 
+            if(phone.length!==10 || !Number.isInteger(Number(phone))){
+                return res.status(200).json({ success, "error": "Enter a valid phone number!" })
+            }
+            if(pincode.length!==6 || !Number.isInteger(Number(pincode))){
+                return res.status(200).json({ success, "error": "Enter a vaild pincode!" })
+            }
+
 
             const instance = new Razorpay({ key_id: process.env.NEXT_PUBLIC_KEY_ID, key_secret: process.env.NEXT_PUBLIC_KEY_SECRET })
     
@@ -35,6 +42,7 @@ const handler = async (req, res) => {
     
             let newOrder = new Order({
                 email,
+                name,
                 address,
                 amount:subTotal,
                 orderId:order.id,

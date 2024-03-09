@@ -3,7 +3,7 @@ import Order from '@/models/Order';
 import mongoose from 'mongoose';
 import { useRouter } from 'next/router';
 
-const orders = ({order,clearCart}) => {
+const Order = ({order,clearCart}) => {
   const router = useRouter();
   useEffect(() => {
     if(router.query.clearCart==1){
@@ -17,7 +17,7 @@ const orders = ({order,clearCart}) => {
     <div className="lg:w-4/5 mx-auto flex flex-wrap">
       <div className="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
         <h2 className="text-sm title-font text-gray-500 tracking-widest">QUICKCART.COM</h2>
-        <h1 className="text-gray-900 text-3xl title-font font-medium mb-4">Order Id: #{order.orderId}</h1>
+        <h1 className="text-gray-900 md:text-3xl text-2xl title-font font-medium mb-4">Order Id: #{order.orderId}</h1>
         <p>Your Order has been successfully placed!</p>
         <p>Payment stauts:<span className='font-semibold'>{order.status}</span></p>
         <div className="flex mb-4">
@@ -57,4 +57,4 @@ export async function getServerSideProps(context) {
   }; 
 }
 
-export default orders
+export default Order

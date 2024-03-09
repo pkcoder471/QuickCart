@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Script from 'next/script';
 import { useRouter } from 'next/router';
 
-const checkout = ({ addToCart, cart, removeItemCart, subTotal, clearCart, user }) => {
+const checkout = ({ addToCart, cart, removeItemCart, subTotal, clearCart}) => {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -15,18 +15,26 @@ const checkout = ({ addToCart, cart, removeItemCart, subTotal, clearCart, user }
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [pincode, setPincode] = useState("");
-
   const [disabled, setdisabled] = useState(true)
   const router = useRouter();
 
   useEffect(() => {
     if(!localStorage.getItem('token')){
-      console.log('dsfsa');
       router.push('/login');
     }
     else{
-      setEmail(user.value.email);
-      console.log('gegg');
+      const getUser = async () =>{
+        const response = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/api/getUser`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ 'token':localStorage.getItem('token')})
+        })
+        const json = await response.json();
+        setEmail(json.email);
+      }
+      getUser();
     }
   }, [])
   
@@ -168,7 +176,7 @@ const checkout = ({ addToCart, cart, removeItemCart, subTotal, clearCart, user }
         <form className='flex flex-row flex-wrap'>
           <div className='flex flex-col  w-1/2 my-2'>
             <label htmlFor="name">Name</label>
-            <input type='text' onChange={handleChange} value={name} className='w-[90%] border-2 border-gray-300 focus:outline-none rounded px-2 py-1' id='name' name='name' />
+            <input type='text' onChange={handleChange} value={name} className='w-[90%] border-2 border-gray-300 focus:outline-none rounded px-2 py-1' id='name' name='name' minLength={3} />
           </div>
           <div className='flex flex-col w-1/2 my-2'>
             <label htmlFor="email">Email</label>

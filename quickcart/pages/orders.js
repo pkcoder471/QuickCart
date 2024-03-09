@@ -57,7 +57,7 @@ const orders = () => {
                 <tr>
                   <th
                     className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Email
+                    Name
                   </th>
                   <th
                     className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
@@ -74,20 +74,21 @@ const orders = () => {
                 </tr>
               </thead>
               <tbody>
+                {orders.length===0 && <p className='font-semibold'>You Don't have any orders!</p>}
                 {orders.length!==0 && orders.map((item)=>{
-                  return <tr><Link href={`/order?id=${item.orderId}`} key={item._id}>
+                  return <tr key={item._id}>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <div className="flex items-center">
                       <div>
                         <p className="text-gray-900 whitespace-no-wrap">
-                          {item.email}
+                          {item.name}
                         </p>
                       </div>
                     </div>
                   </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-900 whitespace-no-wrap">{}</p>
-                  </td>
+                  <Link href={`/order?id=${item.orderId}`} ><td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                    <p className="text-gray-900 whitespace-no-wrap">click here to see details.</p>
+                  </td></Link>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <p className="text-gray-900 whitespace-no-wrap">
                       {Date.now(item.createdAt)}
@@ -97,10 +98,10 @@ const orders = () => {
                     <span
                       className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                       <span aria-hidden
-                        className="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                        className={`absolute inset-0 bg-${item.status==="PAID"?'green':'yellow'}-200 opacity-50 rounded-full`}></span>
                       <span className="relative">{item.status}</span>
                     </span>
-                  </td></Link>
+                  </td>
                 </tr>})}
                
               </tbody>

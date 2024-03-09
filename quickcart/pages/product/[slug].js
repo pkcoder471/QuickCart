@@ -48,7 +48,7 @@ const Slug = ({ buyNow, addToCart, product, variants }) => {
 
   const refreshVariant = (newColor, newSize) => {
     const url = `${process.env.NEXT_PUBLIC_HOST_URL}/product/${variants[newColor][newSize].slug}`;
-    window.location = url;
+    router.push(url);
   }
 
   return (
