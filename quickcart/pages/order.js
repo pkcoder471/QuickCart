@@ -1,8 +1,16 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import Order from '@/models/Order';
 import mongoose from 'mongoose';
+import { useRouter } from 'next/router';
 
-const orders = ({order}) => {
+const orders = ({order,clearCart}) => {
+  const router = useRouter();
+  useEffect(() => {
+    if(router.query.clearCart==1){
+      clearCart();
+    }
+  }, [])
+  
   return (
     <section className="text-gray-600 body-font overflow-hidden">
   <div className="container px-5 py-24 mx-auto">

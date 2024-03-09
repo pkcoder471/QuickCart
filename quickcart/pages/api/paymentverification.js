@@ -1,5 +1,6 @@
 import connectToDb from '@/middleware/mongoose';
 import Order from '@/models/Order';
+import Product from '@/models/Product';
 import crypto from "crypto";
 
 const handler = async (req, res) => {
@@ -13,7 +14,12 @@ const handler = async (req, res) => {
 
     if (generated_signature == razorpay_signature) {
         await Order.findOneAndUpdate({orderId:razorpay_order_id},{status:"PAID",paymentInfo:req.body});
-        res.redirect(`/order?id=${razorpay_order_id}`,200)
+        let order = await Order.findOne({orderId:razorpay_order_id});
+        let products = order.products;
+        for(let item in products){
+            await Product.findOneAndUpdate({itemCode:item},{$inc:{"qty":-products[item].qty}});
+        }
+        res.redirect(`/order?id=${razorpay_order_id}&clearCart=1`,200)
         return res.status(200).json({ "success": true })
     }
     else{

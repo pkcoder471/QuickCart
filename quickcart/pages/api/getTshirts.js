@@ -9,19 +9,17 @@ const handler = async (req,res) =>{
         
         for(let item of products){
             if(item.name in tshirts){
-                if(!tshirts[item.name].color.includes(item.color) &&  item.qty>0){
+                if(!tshirts[item.name].color.includes(item.color)){
                     tshirts[item.name].color.push(item.color);
                 }
-                if(!tshirts[item.name].size.includes(item.size) &&  item.qty>0){
+                if(!tshirts[item.name].size.includes(item.size)){
                     tshirts[item.name].size.push(item.size);
                 }
             }
             else{
-                if(item.qty>0){
-                    tshirts[item.name]=JSON.parse(JSON.stringify(item));
-                    tshirts[item.name].color=[item.color];
-                    tshirts[item.name].size=[item.size];
-                }
+                tshirts[item.name]=JSON.parse(JSON.stringify(item));
+                tshirts[item.name].color=[item.color];
+                tshirts[item.name].size=[item.size];
             }
         }
         return res.status(200).json(tshirts);

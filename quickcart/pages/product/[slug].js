@@ -94,8 +94,8 @@ const Slug = ({ buyNow, addToCart, product, variants }) => {
             </div>
             <div className="flex">
               <span className="title-font font-medium text-2xl text-gray-900">₹{product.price}</span>
-              <button onClick={() => { addToCart(product.itemCode, 1, product.price, newColor, newSize, product.name, product.img) }} className="flex ml-5 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded">Add to Cart</button>
-              <button onClick={() => { buyNow(product.itemCode, 1, product.price, newColor, newSize, product.name, product.img) }} className="flex ml-5 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded">Buy Now</button>
+              <button disabled={product.qty<=0} onClick={() => { addToCart(product.itemCode, 1, product.price, newColor, newSize, product.name, product.img) }} className="flex ml-5 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded">Add to Cart</button>
+              <button disabled={product.qty<=0} onClick={() => { buyNow(product.itemCode, 1, product.price, newColor, newSize, product.name, product.img) }} className="flex ml-5 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded">Buy Now</button>
 
             </div>
             <div className="flex mt-5">
