@@ -1,5 +1,6 @@
 import connectToDb from '@/middleware/mongoose';
 import Order from '@/models/Order';
+import Product from '@/models/Product';
 import Razorpay from 'razorpay';
 
 const handler = async (req, res) => {
@@ -8,6 +9,20 @@ const handler = async (req, res) => {
     const {email, address, subTotal, cart} = req.body;
     try {
         if (req.method === 'POST') {
+
+            let total = 0;
+            for(let item in cart){
+                total+=cart[item].price*cart[item].qty;
+                let product = await Product.findOne({itemCode:item});
+                if(product.price!==cart[item].price){
+                    return res.status(400).json({ success, "errror": "Price of some item have changed, Please try again!" })
+                }
+            }
+            if(total!==subTotal){
+                return res.status(400).json({ success, "errror": "Price of some item have changed, Please try again!" })
+            }
+
+
             const instance = new Razorpay({ key_id: process.env.NEXT_PUBLIC_KEY_ID, key_secret: process.env.NEXT_PUBLIC_KEY_SECRET })
     
             const order = await instance.orders.create({
@@ -24,16 +39,15 @@ const handler = async (req, res) => {
     
             })
             await newOrder.save();
-            console.log(newOrder);
             success = true;
-            return res.status(200).json(order)
+            return res.status(200).json({success,order})
         }
         else {
-            return res.status(400).json({ "errror": "Bad Request!" })
+            return res.status(400).json({ success, "errror": "Bad Request!" })
         }
     } catch (err) {
         console.log(err)
-        return res.status(500).json({ "errror": "Internal server error!" })
+        return res.status(500).json({ success, "errror": "Internal server error!" })
     }
     
 }

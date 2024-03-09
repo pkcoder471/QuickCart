@@ -26,67 +26,79 @@ const checkout = ({ addToCart, cart, removeItemCart, subTotal }) => {
       },
       body: JSON.stringify({ subTotal, cart, name, email, address, phone, city, state, pincode })
     })
-    const order = await response.json();
-
-    const options = {
-      "key": process.env.NEXT_PUBLIC_KEY_ID,
-      "amount": order.amount,
-      "currency": "INR",
-      "name": "Quickcart",
-      "description": "Test Transaction",
-      "image": "https://m.media-amazon.com/images/I/51faXrq-8TL._SX679_.jpg",
-      "order_id": order.id,
-      "callback_url": `http://localhost:3000/api/paymentverification`,
-      "prefill": {
-        "name": "Gaurav Kumar",
-        "email": "gaurav.kumar@example.com",
-        "contact": "9000090000"
-      },
-      config: {
-        display: {
-          blocks: {
-            banks: {
-              name: 'Most Used Methods',
-              instruments: [
-                {
-                  method: 'wallet',
-                  wallets: ['freecharge']
-                },
-                {
+    const json = await response.json();
+    if (json.success) {
+      const options = {
+        "key": process.env.NEXT_PUBLIC_KEY_ID,
+        "amount": json.order.amount,
+        "currency": "INR",
+        "name": "Quickcart",
+        "description": "Test Transaction",
+        "image": "https://m.media-amazon.com/images/I/51faXrq-8TL._SX679_.jpg",
+        "order_id": json.order.id,
+        "callback_url": `http://localhost:3000/api/paymentverification`,
+        "prefill": {
+          "name": "Gaurav Kumar",
+          "email": "gaurav.kumar@example.com",
+          "contact": "9000090000"
+        },
+        config: {
+          display: {
+            blocks: {
+              banks: {
+                name: 'Most Used Methods',
+                instruments: [
+                  {
+                    method: 'wallet',
+                    wallets: ['freecharge']
+                  },
+                  {
                     method: 'upi'
-                },
+                  },
                 ],
+              },
             },
-          },
-          sequence: ["block.banks"],
-          preferences: {
-            show_default_blocks: true // Should Checkout show its default blocks?
+            sequence: ["block.banks"],
+            preferences: {
+              show_default_blocks: true // Should Checkout show its default blocks?
+            }
           }
+        },
+        "notes": {
+          "address": "Razorpay Corporate Office"
+        },
+        "theme": {
+          "color": "#3399cc"
         }
-      },
-      "notes": {
-        "address": "Razorpay Corporate Office"
-      },
-      "theme": {
-        "color": "#3399cc"
-      }
-    };
-    const razor = new window.Razorpay(options);
-    razor.open();
+      };
+      const razor = new window.Razorpay(options);
+      razor.open();
+    }
+    else {
+      toast.error('Price of Some Item have Changed, Please try again!', {
+        position: "top-left",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   }
 
-  
 
-  const handleChange = async (e) =>{
+
+  const handleChange = async (e) => {
     e.preventDefault();
 
-    if(e.target.name=='name') setName(e.target.value);
-    if(e.target.name=='address') setAddress(e.target.value);
-    if(e.target.name=='email') setEmail(e.target.value);
-    if(e.target.name=='phone') setPhone(e.target.value);
-    if(e.target.name=='pincode'){
+    if (e.target.name == 'name') setName(e.target.value);
+    if (e.target.name == 'address') setAddress(e.target.value);
+    if (e.target.name == 'email') setEmail(e.target.value);
+    if (e.target.name == 'phone') setPhone(e.target.value);
+    if (e.target.name == 'pincode') {
       setPincode(e.target.value);
-      if(e.target.value.length==6){
+      if (e.target.value.length == 6) {
         const response = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/api/pincode`);
         const json = await response.json();
         if (Object.keys(json).includes(e.target.value)) {
@@ -100,7 +112,7 @@ const checkout = ({ addToCart, cart, removeItemCart, subTotal }) => {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            });
+          });
         }
         else {
           toast.error('Sorry, Pincode not servicable', {
@@ -111,29 +123,29 @@ const checkout = ({ addToCart, cart, removeItemCart, subTotal }) => {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            });
+          });
         }
-  
+
       }
-      else{
+      else {
         setCity('');
         setState('');
       }
     }
 
-    
 
-    if(name.length>3 && email.length>3 && address.length>3 && phone.length==10 && pincode.length==6){
+
+    if (name.length > 3 && email.length > 3 && address.length > 3 && phone.length == 10 && pincode.length == 6) {
       setdisabled(false);
     }
-    else{
+    else {
       setdisabled(true);
     }
-    
+
   }
   return (
     <div className='container flex flex-col items-center md:px-48 px-5'>
-      <ToastContainer/>
+      <ToastContainer />
       <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
       <h1 className='md:text-3xl text-2xl font-bold mt-10'>Checkout</h1>
       <div className="details w-full">
@@ -167,7 +179,7 @@ const checkout = ({ addToCart, cart, removeItemCart, subTotal }) => {
             <label htmlFor="State">State</label>
             <input type='text' onChange={handleChange} value={state} className='w-[90%] border-2 border-gray-300 focus:outline-none rounded px-2 py-1' id='State' name='state' readOnly />
           </div>
-          
+
 
         </form>
       </div>
