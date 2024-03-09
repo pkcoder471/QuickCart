@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Script from 'next/script';
 
-const checkout = ({ addToCart, cart, removeItemCart, subTotal }) => {
+const checkout = ({ addToCart, cart, removeItemCart, subTotal, clearCart }) => {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -27,6 +27,7 @@ const checkout = ({ addToCart, cart, removeItemCart, subTotal }) => {
       body: JSON.stringify({ subTotal, cart, name, email, address, phone, city, state, pincode })
     })
     const json = await response.json();
+    
     if (json.success) {
       const options = {
         "key": process.env.NEXT_PUBLIC_KEY_ID,
@@ -75,9 +76,11 @@ const checkout = ({ addToCart, cart, removeItemCart, subTotal }) => {
       razor.open();
     }
     else {
-      toast.error('Price of Some Item have Changed, Please try again!', {
+      clearCart();
+      console.log(json.error);
+      toast.error(json.error, {
         position: "top-left",
-        autoClose: 2000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -106,7 +109,7 @@ const checkout = ({ addToCart, cart, removeItemCart, subTotal }) => {
           setState(json[e.target.value][1]);
           toast.success('Hooray, Pincode servicable', {
             position: "top-left",
-            autoClose: 2000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -117,7 +120,7 @@ const checkout = ({ addToCart, cart, removeItemCart, subTotal }) => {
         else {
           toast.error('Sorry, Pincode not servicable', {
             position: "top-left",
-            autoClose: 2000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -145,7 +148,7 @@ const checkout = ({ addToCart, cart, removeItemCart, subTotal }) => {
   }
   return (
     <div className='container flex flex-col items-center md:px-48 px-5'>
-      <ToastContainer />
+      <ToastContainer/>
       <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
       <h1 className='md:text-3xl text-2xl font-bold mt-10'>Checkout</h1>
       <div className="details w-full">
