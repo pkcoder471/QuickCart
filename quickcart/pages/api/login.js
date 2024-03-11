@@ -20,7 +20,6 @@ const handler = async (req, res) => {
             
             const passwordCompare = await bcrypt.compare(password, user.password);
 
-            console.log(passwordCompare)
 
             if (!passwordCompare) {
                 return res.status(400).json({ success, error: "Please try to login with correct credentials" });

@@ -55,6 +55,7 @@ const handler = async (req, res) => {
                 pincode,
                 state,
                 city,
+                phone,
                 amount:subTotal,
                 orderId:order.id,
                 products:cart

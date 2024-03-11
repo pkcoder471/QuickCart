@@ -31,6 +31,10 @@ const OrderSchema = new Schema({
         type:String,
         default:"PENDING"
     },
+    phone:{
+        type:String,
+        required:true
+    },
     address:{
         type:String,
         required:true

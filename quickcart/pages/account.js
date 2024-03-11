@@ -8,23 +8,25 @@ const Account = () => {
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const [pincode, setPincode] = useState("");
-  
+
   const [password, setPassword] = useState("");
   const [npassword, setNpassword] = useState("");
   const [cpassword, setCpassword] = useState("");
 
+  const [display, setDisplay] = useState(null);
+
   useEffect(() => {
-    if(!localStorage.getItem('token')){
+    if (!localStorage.getItem('token')) {
       router.push('/login');
     }
-    else{
-      const getUser = async () =>{
+    else {
+      const getUser = async () => {
         const response = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/api/getUser`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ 'token':localStorage.getItem('token')})
+          body: JSON.stringify({ 'token': localStorage.getItem('token') })
         })
         const json = await response.json();
 
@@ -46,20 +48,26 @@ const Account = () => {
     if (e.target.name == 'phone') setPhone(e.target.value);
     if (e.target.name == 'email') setEmail(e.target.value);
     if (e.target.name == 'pincode') setPincode(e.target.value);
+    if (e.target.name == 'password') setPassword(e.target.value);
+    if (e.target.name == 'npassword') setNpassword(e.target.value);
+    if (e.target.name == 'cpassword'){
+      setCpassword(e.target.value);
+      if(npassword===e.target.value) setDisplay(true)
+      else setDisplay(false)
+    }
   }
-  const handleResestAccount = async (e) =>{
+  const handleResestAccount = async (e) => {
     e.preventDefault();
-    console.log("hefd");
     const response = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/api/updateAccount`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({name, address, phone, email, pincode})
+      body: JSON.stringify({ name, address, phone, email, pincode })
     })
     const json = await response.json();
-    if(json.success){
-      toast.success('Account Updated!', {
+    if (json.success) {
+      toast.success('Account Updated Successfully!', {
         position: "top-left",
         autoClose: 3000,
         hideProgressBar: false,
@@ -69,7 +77,7 @@ const Account = () => {
         progress: undefined,
       });
     }
-    else{
+    else {
       toast.error('Some Error Occurred!', {
         position: "top-left",
         autoClose: 3000,
@@ -81,9 +89,45 @@ const Account = () => {
       });
     }
   }
+
+  const handleResestPassword = async (e) => {
+    e.preventDefault();
+    if (npassword === cpassword) {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/api/updatePassword`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ 'token': localStorage.getItem('token'), password, npassword, cpassword })
+      })
+      const json = await response.json();
+      if (json.success) {
+        toast.success('Password Updated Successfully!', {
+          position: "top-left",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+      else {
+        toast.error('Some Error Occurred!', {
+          position: "top-left",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    }
+  }
   return (
     <div className='container flex flex-col items-center md:px-48 px-5'>
-      <ToastContainer/>
+      <ToastContainer />
       <div className="account w-full">
         <h2 className='md:text-3xl text-2xl font-bold my-5 text-center'>Update your account</h2>
         <form className='flex flex-row flex-wrap' >
@@ -114,18 +158,21 @@ const Account = () => {
         <h2 className='md:text-xl text-2xl font-bold my-5 text-center'>Update your Password</h2>
         <form className='flex flex-row flex-wrap'>
           <div className='flex flex-col  w-1/3 my-2'>
-            <label htmlFor="name">Old Password</label>
+            <label htmlFor="password">Old Password</label>
             <input type='Password' onChange={handleChange} value={password} className='w-[90%] border-2 border-gray-300 focus:outline-none rounded px-2 py-1' id='password' name='password' minLength={3} />
           </div>
           <div className='flex flex-col w-1/3 my-2'>
-            <label htmlFor="email">New Password</label>
-            <input type='Password' onChange={handleChange} value={npassword} className='w-[90%] border-2 border-gray-300 focus:outline-none rounded px-2 py-1' id='npassword' name='npassword' readOnly />
+            <label htmlFor="npassword">New Password</label>
+            <input type='Password' onChange={handleChange} value={npassword} className='w-[90%] border-2 border-gray-300 focus:outline-none rounded px-2 py-1' id='npassword' name='npassword'/>
           </div >
           <div className='flex flex-col  w-1/3 my-2'>
-            <label htmlFor="Phone">Confirm new Password</label>
+            <label htmlFor="cpassword">Confirm new Password</label>
             <input type='Password' onChange={handleChange} value={cpassword} className='w-[90%] border-2 border-gray-300 focus:outline-none rounded px-2 py-1' id='cpassword' name='cpassword' />
+            {npassword.length!=0 && display!=null && display && <p className='text-green-500'>passwords matched</p>}
+            {npassword.length!=0 && display!=null && !display && <p className='text-red-500'>passwords not matched</p>}
           </div>
-          <button type="button" className="text-white bg-orange-500 hover:bg-orange-700 focus:outline-none focus:ring-4font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 my-2 mb-2 ">Submit</button>
+          
+          <button type="button" className="text-white bg-orange-500 hover:bg-orange-700 focus:outline-none focus:ring-4font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 my-2 mb-2 " onClick={handleResestPassword} >Submit</button>
         </form>
       </div>
     </div>
