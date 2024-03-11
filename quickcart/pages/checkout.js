@@ -33,6 +33,8 @@ const checkout = ({ addToCart, cart, removeItemCart, subTotal, clearCart}) => {
         })
         const json = await response.json();
         setEmail(json.email);
+        setName(json.name);
+        setPhone(json.phone);
       }
       getUser();
     }

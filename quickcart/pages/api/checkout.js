@@ -37,7 +37,7 @@ const handler = async (req, res) => {
                 return res.status(200).json({ clearCart, success, "error": "Enter a vaild pincode!" })
             }
 
-            if(!Object(pincodes).includes(pincode)){
+            if(!Object.keys(pincodes).includes(pincode)){
                 return res.status(200).json({ clearCart, success, "error": "Sorry, Pincode not servicable!" });
             }
 
