@@ -97,8 +97,9 @@ const checkout = ({ addToCart, cart, removeItemCart, subTotal, clearCart}) => {
       razor.open();
     }
     else {
-      clearCart();
-      console.log(json.error);
+      if(json.clearCart){
+        clearCart();
+      }
       toast.error(json.error, {
         position: "top-left",
         autoClose: 3000,
