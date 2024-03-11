@@ -54,7 +54,7 @@ const Navbar = ({addToCart, handleLogout, user, cart, removeItemCart, clearCart,
         <IoPersonCircleSharp className='text-2xl md:text-3xl cursor-pointer' onMouseOver={()=>{setDropdown(true)}} onMouseLeave={()=>{setDropdown(false)}} />}
         {dropdown && <div className="profile-dropdown  absolute right-8 top-9  bg-white px-4 rounded-md shadow-lg border-gray-200 border-2" onMouseOver={()=>{setDropdown(true)}} onMouseLeave={()=>{setDropdown(false)}} onClick={()=>{setDropdown(false)}} >
         <ul>
-          <Link href={'/account'} ><li className='hover:text-orange-500 py-1'>Your Account</li></Link>
+          <Link href={'/Account'} ><li className='hover:text-orange-500 py-1'>Your Account</li></Link>
           <Link href={'/orders'} ><li className='hover:text-orange-500 py-1'>Orders</li></Link>
           <li className='cursor-pointer hover:text-orange-500 py-1' onClick={handleLogout}>Logout</li>
         </ul>

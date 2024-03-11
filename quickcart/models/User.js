@@ -7,6 +7,15 @@ const UserSchema = new Schema({
         type: String,
         required:true
     },
+    address:{
+        type: String,
+    },
+    phone:{
+        type: String,
+    },
+    pincode:{
+        type: String,
+    },
     email:{
         type: String,
         required:true,

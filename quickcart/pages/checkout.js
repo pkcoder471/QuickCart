@@ -203,8 +203,6 @@ const checkout = ({ addToCart, cart, removeItemCart, subTotal, clearCart}) => {
             <label htmlFor="State">State</label>
             <input type='text' onChange={handleChange} value={state} className='w-[90%] border-2 border-gray-300 focus:outline-none rounded px-2 py-1' id='State' name='state' readOnly />
           </div>
-
-
         </form>
       </div>
       <div className="items w-full">
