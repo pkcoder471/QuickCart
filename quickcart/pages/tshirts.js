@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import Head from 'next/head';
 
-const tshirts = ({products}) => {
+const Tshirts = ({products}) => {
   
   return (
     <section className="text-gray-600 min-h-screen body-font">
@@ -22,7 +22,7 @@ const tshirts = ({products}) => {
         <div className="flex flex-wrap -m-4">
           {Object.keys(products).length===0 && <div className="msg">item out of Stock</div> }
           {Object.keys(products).length!==0 && Object.keys(products).map((item)=>{
-            return <Link key={products[item].itemCode} href={`/product/${products[item].itemCode}`} className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-sm cursor-pointer "><div>
+            return <Link key={products[item].itemCode} href={`/product/${products[item].itemCode}`} className="lg:w-1/4 md:w-1/2 lg:p-4 md:p-4 w-full shadow-sm cursor-pointer "><div>
             <a className="  relative h-80 m-auto rounded overflow-hidden">
               <img alt="ecommerce"  className="h-80 m-auto block" src={products[item].img}/>
             </a>
@@ -63,4 +63,4 @@ export async function getServerSideProps() {
   }; 
 }
 
-export default tshirts
+export default Tshirts

@@ -44,6 +44,7 @@ export default function App({ Component, pageProps }) {
   const handleLogout = () =>{
     localStorage.removeItem('token');
     setUser({value:null});
+    
   }
   const saveCart = (myCart) =>{
     localStorage.setItem("cart",JSON.stringify(myCart));
@@ -100,6 +101,7 @@ export default function App({ Component, pageProps }) {
   }
 
   return <>
+  
   <Head>
         <title>QuickCart - Home page</title>
         <meta charset="UTF-8" />

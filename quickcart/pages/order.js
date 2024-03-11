@@ -30,7 +30,7 @@ const order = ({order,clearCart}) => {
         <meta name="viewport"
           content="width=device-width, initial-scale=1.0" />
       </Head>
-  <div className="container px-5 py-24 mx-auto">
+  <div className="container px-5 md:py-24 py-8 mx-auto">
     <div className="lg:w-4/5 mx-auto flex flex-wrap">
       <div className="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
         <h2 className="text-sm title-font text-gray-500 tracking-widest">QUICKCART.COM</h2>

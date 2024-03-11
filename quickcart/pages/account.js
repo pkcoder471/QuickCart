@@ -146,41 +146,41 @@ const Account = () => {
         <h2 className='md:text-3xl text-2xl font-bold my-5 text-center'>Update your account</h2>
         <form className='flex flex-row flex-wrap' >
           <div className='flex flex-col  w-1/2 my-2'>
-            <label htmlFor="name">Name</label>
+            <label htmlFor="name" className='md:text-sm text-xs'>Name</label>
             <input type='text' onChange={handleChange} value={name} className='w-[90%] border-2 border-gray-300 focus:outline-none rounded px-2 py-1' id='name' name='name' minLength={3} />
           </div>
           <div className='flex flex-col w-1/2 my-2'>
-            <label htmlFor="email">Email<span className='text-xs'> (Cannot be changed)</span></label>
+            <label htmlFor="email" className='md:text-sm text-xs'>Email<span className='text-xs'> (Cannot be changed)</span></label>
             <input type='email' onChange={handleChange} value={email} className='w-[90%] border-2 border-gray-300 focus:outline-none rounded px-2 py-1' id='email' name='email' readOnly />
           </div >
           <div className='flex flex-col w-full my-2'>
-            <label htmlFor="address">Address</label>
+            <label htmlFor="address" className='md:text-sm text-xs'>Address</label>
             <textarea type='text' onChange={handleChange} value={address} className='w-[95%] border-2 border-gray-300 focus:outline-none rounded px-2 py-1' rows={3} id='address' name='address' />
           </div>
           <div className='flex flex-col  w-1/2 my-2'>
-            <label htmlFor="Phone">Phone</label>
+            <label htmlFor="Phone" className='md:text-sm text-xs'>Phone</label>
             <input type='tel' onChange={handleChange} value={phone} className='w-[90%] border-2 border-gray-300 focus:outline-none rounded px-2 py-1' id='Phone' name='phone' />
           </div>
           <div className='flex flex-col w-1/2 my-2'>
-            <label htmlFor="Pincode">Pincode</label>
+            <label htmlFor="Pincode" className='md:text-sm text-xs'>Pincode</label>
             <input type='text' onChange={handleChange} value={pincode} className='w-[90%] border-2 border-gray-300 focus:outline-none rounded px-2 py-1' id='Pincode' name='pincode' />
           </div >
           <button type="button" onClick={handleResestAccount} className="text-white bg-orange-500 hover:bg-orange-700 focus:outline-none focus:ring-4font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 my-2 mb-2 ">Submit</button>
         </form>
       </div>
       <div className="account w-full">
-        <h2 className='md:text-xl text-2xl font-bold my-5 text-center'>Update your Password</h2>
+        <h2 className='md:text-xl text-xl font-bold my-5 text-center'>Update your Password</h2>
         <form className='flex flex-row flex-wrap'>
           <div className='flex flex-col  w-1/3 my-2'>
-            <label htmlFor="password">Old Password</label>
+            <label htmlFor="password" className='md:text-sm text-xs'>Old Password</label>
             <input type='Password' onChange={handleChange} value={password} className='w-[90%] border-2 border-gray-300 focus:outline-none rounded px-2 py-1' id='password' name='password' minLength={3} />
           </div>
           <div className='flex flex-col w-1/3 my-2'>
-            <label htmlFor="npassword">New Password</label>
+            <label htmlFor="npassword" className='md:text-sm text-xs'>New Password</label>
             <input type='Password' onChange={handleChange} value={npassword} className='w-[90%] border-2 border-gray-300 focus:outline-none rounded px-2 py-1' id='npassword' name='npassword'/>
           </div >
-          <div className='flex flex-col  w-1/3 my-2'>
-            <label htmlFor="cpassword">Confirm new Password</label>
+          <div className='flex flex-col md:mt-2 -mt-2  w-1/3 my-2'>
+            <label htmlFor="cpassword" className='md:text-sm text-xs'>Confirm new Password</label>
             <input type='Password' onChange={handleChange} value={cpassword} className='w-[90%] border-2 border-gray-300 focus:outline-none rounded px-2 py-1' id='cpassword' name='cpassword' />
             {npassword.length!=0 && display!=null && display && <p className='text-green-500'>passwords matched</p>}
             {npassword.length!=0 && display!=null && !display && <p className='text-red-500'>passwords not matched</p>}
