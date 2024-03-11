@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Account = () => {
   const [name, setName] = useState("");
@@ -44,15 +46,47 @@ const Account = () => {
     if (e.target.name == 'phone') setPhone(e.target.value);
     if (e.target.name == 'email') setEmail(e.target.value);
     if (e.target.name == 'pincode') setPincode(e.target.value);
-    if (e.target.name == 'password') setPassword(e.target.value);
-    if (e.target.name == 'npassword') setNpassword(e.target.value);
-    if (e.target.name == 'cpassword') setCpassword(e.target.value);
+  }
+  const handleResestAccount = async (e) =>{
+    e.preventDefault();
+    console.log("hefd");
+    const response = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/api/updateAccount`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({name, address, phone, email, pincode})
+    })
+    const json = await response.json();
+    if(json.success){
+      toast.success('Account Updated!', {
+        position: "top-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+    else{
+      toast.error('Some Error Occurred!', {
+        position: "top-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   }
   return (
     <div className='container flex flex-col items-center md:px-48 px-5'>
+      <ToastContainer/>
       <div className="account w-full">
         <h2 className='md:text-3xl text-2xl font-bold my-5 text-center'>Update your account</h2>
-        <form className='flex flex-row flex-wrap'>
+        <form className='flex flex-row flex-wrap' >
           <div className='flex flex-col  w-1/2 my-2'>
             <label htmlFor="name">Name</label>
             <input type='text' onChange={handleChange} value={name} className='w-[90%] border-2 border-gray-300 focus:outline-none rounded px-2 py-1' id='name' name='name' minLength={3} />
@@ -73,7 +107,7 @@ const Account = () => {
             <label htmlFor="Pincode">Pincode</label>
             <input type='text' onChange={handleChange} value={pincode} className='w-[90%] border-2 border-gray-300 focus:outline-none rounded px-2 py-1' id='Pincode' name='pincode' />
           </div >
-          <button type="button" className="text-white bg-orange-500 hover:bg-orange-700 focus:outline-none focus:ring-4font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 my-2 mb-2 ">Submit</button>
+          <button type="button" onClick={handleResestAccount} className="text-white bg-orange-500 hover:bg-orange-700 focus:outline-none focus:ring-4font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 my-2 mb-2 ">Submit</button>
         </form>
       </div>
       <div className="account w-full">

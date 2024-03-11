@@ -9,12 +9,15 @@ const UserSchema = new Schema({
     },
     address:{
         type: String,
+        default:"",
     },
     phone:{
         type: String,
+        default:"",
     },
     pincode:{
         type: String,
+        default:"",
     },
     email:{
         type: String,

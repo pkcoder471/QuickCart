@@ -8,7 +8,7 @@ const handler = async (req, res) => {
 
     let success = false;
     let clearCart = false;
-    const {email, name, address, phone, pincode, subTotal, cart} = req.body;
+    const {email, name, address, phone, city, state, pincode, subTotal, cart} = req.body;
     try {
         if (req.method === 'POST') {
 
@@ -52,6 +52,9 @@ const handler = async (req, res) => {
                 email,
                 name,
                 address,
+                pincode,
+                state,
+                city,
                 amount:subTotal,
                 orderId:order.id,
                 products:cart
