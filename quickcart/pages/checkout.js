@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Script from 'next/script';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 const checkout = ({ addToCart, cart, removeItemCart, subTotal, clearCart}) => {
 
@@ -170,7 +171,19 @@ const checkout = ({ addToCart, cart, removeItemCart, subTotal, clearCart}) => {
 
   }
   return (
-    <div className='container flex flex-col items-center md:px-48 px-5'>
+    <div className='container flex flex-col min-h-screen items-center md:px-48 px-5'>
+      <Head>
+        <title>QuickCart - Checkout page</title>
+        <meta charset="UTF-8" />
+        <meta name="description"
+          content="NextJS Head component" />
+        <meta name="keywords"
+          content="HTML, CSS, JavaScript, NextJS" />
+        <meta name="author"
+          content="Prateek Kashyap" />
+        <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+      </Head>
       <ToastContainer/>
       <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
       <h1 className='md:text-3xl text-2xl font-bold mt-10'>Checkout</h1>

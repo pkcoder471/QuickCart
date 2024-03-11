@@ -1,6 +1,7 @@
 import React, { useEffect, useState} from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link';
+import Head from 'next/head';
 
 const orders = () => {
   const router = useRouter();
@@ -27,7 +28,19 @@ const orders = () => {
   }, [])
   
   return (
-    <div className="bg-white p-8 rounded-md w-full">
+    <div className="bg-white p-8 min-h-screen rounded-md w-full">
+      <Head>
+        <title>QuickCart - Orders page</title>
+        <meta charset="UTF-8" />
+        <meta name="description"
+          content="NextJS Head component" />
+        <meta name="keywords"
+          content="HTML, CSS, JavaScript, NextJS" />
+        <meta name="author"
+          content="Prateek Kashyap" />
+        <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+      </Head>
       <div className=" flex items-center justify-between pb-6">
         <div>
           <h2 className="text-gray-600 font-semibold">Products Oder</h2>

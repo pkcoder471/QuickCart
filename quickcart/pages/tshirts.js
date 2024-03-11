@@ -1,10 +1,23 @@
 import React from 'react'
 import Link from 'next/link'
+import Head from 'next/head';
 
 const tshirts = ({products}) => {
   
   return (
-    <section className="text-gray-600 body-font">
+    <section className="text-gray-600 min-h-screen body-font">
+      <Head>
+        <title>QuickCart - Tshirts page</title>
+        <meta charset="UTF-8" />
+        <meta name="description"
+          content="NextJS Head component" />
+        <meta name="keywords"
+          content="HTML, CSS, JavaScript, NextJS" />
+        <meta name="author"
+          content="Prateek Kashyap" />
+        <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+      </Head>
       <div className="container px-16 py-16 mx-auto">
         <div className="flex flex-wrap -m-4">
           {Object.keys(products).length===0 && <div className="msg">item out of Stock</div> }

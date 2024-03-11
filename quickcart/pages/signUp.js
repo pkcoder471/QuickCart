@@ -4,8 +4,9 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Head from 'next/head';
 
-const signUp = () => {
+const SignUp = () => {
   let router = useRouter();
 
   const [credentials, setcredentials] = useState({ name: "", email: "", password: "", cpassword: "" });
@@ -21,7 +22,7 @@ const signUp = () => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        });
+      });
     }
     else {
       const response = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/api/SignUp`, {
@@ -42,11 +43,11 @@ const signUp = () => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          });
+        });
 
-          setTimeout(()=>{
-            router.push('/')
-          },1000)
+        setTimeout(() => {
+          router.push('/')
+        }, 1000)
       }
       else {
         toast.error('Internal Server error', {
@@ -57,7 +58,7 @@ const signUp = () => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          });
+        });
       }
     }
   }
@@ -65,8 +66,20 @@ const signUp = () => {
     setcredentials({ ...credentials, [e.target.name]: e.target.value })
   }
   return (
-    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-      <ToastContainer/>
+    <div className="flex min-h-screen flex-col justify-center px-6 py-12 lg:px-8">
+      <Head>
+        <title>QuickCart - SignUp page</title>
+        <meta charset="UTF-8" />
+        <meta name="description"
+          content="NextJS Head component" />
+        <meta name="keywords"
+          content="HTML, CSS, JavaScript, NextJS" />
+        <meta name="author"
+          content="Prateek Kashyap" />
+        <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+      </Head>
+      <ToastContainer />
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img className="mx-auto h-10 w-auto" src="/quickcart_logo.png" alt="Your Company" />
         <h2 className="mt-8 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign up for an account</h2>
@@ -102,4 +115,4 @@ const signUp = () => {
   )
 }
 
-export default signUp
+export default SignUp

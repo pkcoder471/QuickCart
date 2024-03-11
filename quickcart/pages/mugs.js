@@ -2,10 +2,23 @@ import React from 'react'
 import Link from 'next/link'
 import Product from '@/models/Product';
 import mongoose from 'mongoose';
+import Head from 'next/head';
 
 const mugs = ({products}) => {
   return (
-    <section className="text-gray-600 body-font">
+    <section className="text-gray-600 body-font min-h-screen">
+      <Head>
+        <title>QuickCart - Mugs page</title>
+        <meta charset="UTF-8" />
+        <meta name="description"
+          content="NextJS Head component" />
+        <meta name="keywords"
+          content="HTML, CSS, JavaScript, NextJS" />
+        <meta name="author"
+          content="Prateek Kashyap" />
+        <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+      </Head>
     <div className="container px-16 py-16 mx-auto">
       <div className="flex flex-wrap -m-4">
         {products.length===0 && <div className="msg text-center text-3xl font-semibold">Sorry, Item out of Stock</div> }

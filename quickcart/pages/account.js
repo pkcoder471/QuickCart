@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Head from 'next/head';
+
 
 const Account = () => {
   const [name, setName] = useState("");
@@ -126,7 +128,19 @@ const Account = () => {
     }
   }
   return (
-    <div className='container flex flex-col items-center md:px-48 px-5'>
+    <div className='container flex flex-col min-h-screen items-center md:px-48 px-5'>
+      <Head>
+        <title>QuickCart - Account page</title>
+        <meta charset="UTF-8" />
+        <meta name="description"
+          content="NextJS Head component" />
+        <meta name="keywords"
+          content="HTML, CSS, JavaScript, NextJS" />
+        <meta name="author"
+          content="Prateek Kashyap" />
+        <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+      </Head>
       <ToastContainer />
       <div className="account w-full">
         <h2 className='md:text-3xl text-2xl font-bold my-5 text-center'>Update your account</h2>

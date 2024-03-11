@@ -4,6 +4,8 @@ import Product from '@/models/Product';
 import mongoose from 'mongoose';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Head from 'next/head';
+
 
 const Slug = ({ buyNow, addToCart, product, variants }) => {
   const router = useRouter();
@@ -70,7 +72,19 @@ const Slug = ({ buyNow, addToCart, product, variants }) => {
   }
 
   return (
-    <section className="text-gray-600 body-font overflow-hidden">
+    <section className="text-gray-600 min-h-screen body-font overflow-hidden">
+      <Head>
+        <title>QuickCart</title>
+        <meta charset="UTF-8" />
+        <meta name="description"
+          content="NextJS Head component" />
+        <meta name="keywords"
+          content="HTML, CSS, JavaScript, NextJS" />
+        <meta name="author"
+          content="Prateek Kashyap" />
+        <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+      </Head>
       <ToastContainer/>
       <div className="container px-5 py-24 mx-auto">
         <div className="lg:w-3/5 mx-auto flex flex-wrap">

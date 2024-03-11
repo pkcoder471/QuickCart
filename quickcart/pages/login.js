@@ -4,8 +4,9 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Head from 'next/head';
 
-const login = () => {
+const Login = () => {
 
   let router = useRouter();
   const [credentials, setcredentials] = useState({ email: "", password: "" });
@@ -21,7 +22,7 @@ const login = () => {
     const json = await response.json();
     if (json.success) {
       localStorage.setItem('token', json.authToken);
-      
+
       toast.success('Successfully logged in', {
         position: "top-left",
         autoClose: 5000,
@@ -30,11 +31,11 @@ const login = () => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        });
+      });
 
-        setTimeout(()=>{
-          router.push('/')
-        },2000)
+      setTimeout(() => {
+        router.push('/')
+      }, 2000)
     }
     else {
       toast.error('Wrong Credentials', {
@@ -45,15 +46,28 @@ const login = () => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        });
+      });
     }
   }
   const onChange = (e) => {
     setcredentials({ ...credentials, [e.target.name]: e.target.value })
   }
   return (
-    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-      <ToastContainer/>
+
+    <div className="flex min-h-screen flex-col justify-center px-6 py-12 lg:px-8">
+      <ToastContainer />
+      <Head>
+        <title>QuickCart - Login page</title>
+        <meta charset="UTF-8" />
+        <meta name="description"
+          content="NextJS Head component" />
+        <meta name="keywords"
+          content="HTML, CSS, JavaScript, NextJS" />
+        <meta name="author"
+          content="Prateek Kashyap" />
+        <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+      </Head>
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img className="mx-auto h-10 w-auto" src="/quickcart_logo.png" alt="Your Company" />
         <h2 className="mt-8 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
@@ -90,4 +104,4 @@ const login = () => {
   )
 }
 
-export default login
+export default Login

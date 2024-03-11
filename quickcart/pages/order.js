@@ -2,6 +2,7 @@ import React,{useEffect, useState} from 'react'
 import Order from '@/models/Order';
 import mongoose from 'mongoose';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 const order = ({order,clearCart}) => {
   const [date, setDate] = useState()
@@ -16,7 +17,19 @@ const order = ({order,clearCart}) => {
 
   
   return (
-    <section className="text-gray-600 body-font overflow-hidden">
+    <section className="text-gray-600 min-h-screen body-font overflow-hidden">
+      <Head>
+        <title>QuickCart</title>
+        <meta charset="UTF-8" />
+        <meta name="description"
+          content="NextJS Head component" />
+        <meta name="keywords"
+          content="HTML, CSS, JavaScript, NextJS" />
+        <meta name="author"
+          content="Prateek Kashyap" />
+        <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+      </Head>
   <div className="container px-5 py-24 mx-auto">
     <div className="lg:w-4/5 mx-auto flex flex-wrap">
       <div className="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">

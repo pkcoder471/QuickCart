@@ -1,9 +1,22 @@
 import React from 'react'
 import Link from 'next/link'
+import Head from 'next/head';
 
-const forgot = () => {
+const Forgot = () => {
     return (
-        <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+        <div className="flex min-h-screen flex-col justify-center px-6 py-12 lg:px-8">
+            <Head>
+        <title>QuickCart - Forgot page</title>
+        <meta charset="UTF-8" />
+        <meta name="description"
+          content="NextJS Head component" />
+        <meta name="keywords"
+          content="HTML, CSS, JavaScript, NextJS" />
+        <meta name="author"
+          content="Prateek Kashyap" />
+        <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+      </Head>
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                 <img className="mx-auto h-10 w-auto" src="/quickcart_logo.png" alt="Your Company" />
                 <h2 className="mt-8 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Forgot Password</h2>
@@ -26,4 +39,4 @@ const forgot = () => {
     )
 }
 
-export default forgot
+export default Forgot

@@ -4,6 +4,7 @@ import "@/styles/globals.css";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import LoadingBar from 'react-top-loading-bar'
+import Head from 'next/head';
 
 export default function App({ Component, pageProps }) {
   const [cart, setCart] = useState({});
@@ -99,6 +100,19 @@ export default function App({ Component, pageProps }) {
   }
 
   return <>
+  <Head>
+        <title>QuickCart - Home page</title>
+        <meta charset="UTF-8" />
+        <link rel="icon" href="/favicon.png" />
+        <meta name="description"
+          content="NextJS Head component" />
+        <meta name="keywords"
+          content="HTML, CSS, JavaScript, NextJS" />
+        <meta name="author"
+          content="Prateek Kashyap" />
+        <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+  </Head>
   <LoadingBar
         color='#f97316'
         progress={progress}
