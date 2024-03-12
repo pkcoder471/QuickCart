@@ -9,7 +9,6 @@ import Head from 'next/head';
 
 const Slug = ({ buyNow, addToCart, product, variants }) => {
   const router = useRouter();
-  console.log(product);
   const [pincode, setPincode] = useState()
   const [display, setDisplay] = useState()
   const [newColor, setnewColor] = useState(product.color);

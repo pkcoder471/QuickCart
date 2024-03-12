@@ -23,7 +23,7 @@ const stickers = ({products}) => {
       <div className="flex flex-wrap -m-4">
         {products.length===0 && <div className="msg text-center text-3xl font-semibold">Sorry, Item out of Stock</div> }
         {products.length!==0 && products.map((item)=>{
-          return <Link key={item.itemCode} href={`/product/${item.itemCode}`} className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-sm cursor-pointer "><div>
+          return <Link key={item.itemCode} href={`/product/${item.itemCode}`} className="lg:w-1/4 md:w-1/2 md:p-4 w-full shadow-sm cursor-pointer "><div>
           <a className="  relative h-80 m-auto rounded overflow-hidden">
             <img alt="ecommerce"  className="h-80 m-auto block" src={item.img}/>
           </a>

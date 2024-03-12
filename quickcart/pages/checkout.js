@@ -96,7 +96,7 @@ const checkout = ({ addToCart, cart, removeItemCart, subTotal, clearCart}) => {
           "color": "#3399cc"
         }
       };
-      const razor = new window.Razorpay(options);
+      const razor = new Razorpay(options);
       razor.open();
     }
     else {
