@@ -20,16 +20,28 @@ const Navbar = ({addToCart, handleLogout, user, cart, removeItemCart, clearCart,
       handleCart();
     }
     if(router.pathname=='/hoodies'){
-      handleNav();
+      if(reff.current.classList.contains('translate-x-0')){
+        reff.current.classList.add('-translate-x-full');
+        reff.current.classList.remove('translate-x-0');
+      }
     }
     if(router.pathname=='/tshirts'){
-      handleNav();
+      if(reff.current.classList.contains('translate-x-0')){
+        reff.current.classList.add('-translate-x-full');
+        reff.current.classList.remove('translate-x-0');
+      }
     }
     if(router.pathname=='/mugs'){
-      handleNav();
+      if(reff.current.classList.contains('translate-x-0')){
+        reff.current.classList.add('-translate-x-full');
+        reff.current.classList.remove('translate-x-0');
+      }
     }
     if(router.pathname=='/stickers'){
-      handleNav();
+      if(reff.current.classList.contains('translate-x-0')){
+        reff.current.classList.add('-translate-x-full');
+        reff.current.classList.remove('translate-x-0');
+      }
     }
   }, [router.query]);
   
