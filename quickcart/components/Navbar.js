@@ -119,6 +119,7 @@ const Navbar = ({addToCart, handleLogout, user, cart, removeItemCart, clearCart,
           </div>
         </footer>}
       </div>
+      {/* sidemenu  */}
       <div ref={reff} className="sidebar md:hidden bg-orange-300 w-72 h-screen absolute top-0 left-0 -translate-x-full transform transition-transform">
         <div className="header px-6  py-8 flex justify-center bg-orange-300 sticky top-0 ">
         <h1 className='text-xl font-semibold'>MENU</h1>
